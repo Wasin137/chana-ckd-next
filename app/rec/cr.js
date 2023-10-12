@@ -2,8 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import { Row, Col, Form, Button } from 'react-bootstrap'
 
-export default function cr({ onSuggestionChange }) {
-    const [lastcr, setLastcr] = useState(0.7)
+export default function cr({ lastcr, setLastcr, onSuggestionChange }) {
     const [prevcr, setPrevcr] = useState(0.7)
     const [diffcr, setDiffcr] = useState('')
     const [sugcr, setsugcr] = useState('')

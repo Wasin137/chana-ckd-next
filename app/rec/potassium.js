@@ -2,8 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import { Row, Col, Form, Button } from 'react-bootstrap'
 
-export default function potassium({ onSuggestionChange }) {
-    const [lastk, setLastk] = useState(4)
+export default function potassium({lastk, setLastk, onSuggestionChange }) {
     const [prevk, setPrevk] = useState(4)
     const [diffk, setDiffk] = useState('')
     const [sugk, setsugk] = useState('')

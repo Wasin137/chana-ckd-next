@@ -2,8 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import { Row, Col, Form, Button } from 'react-bootstrap'
 
-export default function gfr({ onSuggestionChange }) {
-    const [lastgfr, setLastgfr] = useState(100)
+export default function gfr({ lastgfr, setLastgfr, onSuggestionChange }) {
     const [prevgfr, setPrevgfr] = useState(100)
     const [diffgfr, setDiffgfr] = useState('')
     const [suggfr, setsuggfr] = useState('')
