@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import { Row, Col, Form, InputGroup } from 'react-bootstrap'
 import Image from 'next/image'
 
@@ -18,7 +18,7 @@ export default function Cal({lastcal, setLastcal, onSuggestionChange, fucal, set
         setPrevcal(event.target.value)
     }
 
-    const OutputSugCal = (lastcal, prevcal) => {
+    const OutputSugCal = useCallback((lastcal, prevcal) => {
         const caldiff = lastcal - prevcal
         if (caldiff > 0) {
             setDiffcal(`ค่า Calcium เพิ่มขึ้น ${caldiff}`)
@@ -38,7 +38,7 @@ export default function Cal({lastcal, setLastcal, onSuggestionChange, fucal, set
             onSuggestionChange(rec)
             setFucal('')
         }
-    }
+    }, [setDiffcal, setSugcal, onSuggestionChange, setFucal]);
 
     useEffect(() => {
         OutputSugCal(lastcal, prevcal)

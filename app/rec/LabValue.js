@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { Row, Form, Table, InputGroup } from 'react-bootstrap'
 import Image from 'next/image';
 
@@ -98,7 +98,7 @@ export default function LabValue({
             fu: null
         }
     ]
-    const CollectLab = () => {
+    const CollectLab = useCallback(() => {
         let result = [];
         allLabData.forEach(lab => {
             if (lab.value) {
@@ -109,23 +109,23 @@ export default function LabValue({
             }
         });
         setLabresult(result.join(''));
-    };
+    }, [allLabData]);
 
-    const FollowUp = () => {
-        let nearfu = []
+    const FollowUp = useCallback(() => {
+        let nearfu = [];
         allLabData.forEach(lab => {
             if (lab.fu) {
-                nearfu.push(Number(lab.fu))
+                nearfu.push(Number(lab.fu));
             }
-        })
-        if (nearfu.length == 0){
-            setNearestfu('-')
-            setShowfu(false)
+        });
+        if (nearfu.length == 0) {
+            setNearestfu('-');
+            setShowfu(false);
         } else {
-            setNearestfu(Math.min(...nearfu))
-            setShowfu(true)
+            setNearestfu(Math.min(...nearfu));
+            setShowfu(true);
         }
-    }
+    }, [allLabData]);
 
     const [btnDisabled, setBtnDisabled] = useState(false)
     let btnTimeout
