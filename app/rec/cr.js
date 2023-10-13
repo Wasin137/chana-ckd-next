@@ -44,13 +44,13 @@ export default function Cr({ lastcr, setLastcr, onSuggestionChange, fucr, setFuc
 
     useEffect(() => {
         Outputsugcr(lastcr, prevcr)
-    }, [lastcr, prevcr])
+    }, [lastcr, prevcr, Outputsugcr])
 
     useEffect(() => {
         return () => {
             clearTimeout(btnTimeout);
         };
-    }, []);
+    }, [btnTimeout]);
 
     return (
         <>

@@ -42,13 +42,13 @@ export default function Hb({lasthb, setLasthb, onSuggestionChange, fuhb, setFuhb
 
     useEffect(() => {
         OutputSughb(lasthb, prevhb)
-    }, [lasthb, prevhb])
+    }, [lasthb, prevhb, OutputSughb])
 
     useEffect(() => {
         return () => {
             clearTimeout(btnTimeout);
         };
-    }, []);
+    }, [btnTimeout]);
 
     return (
         <>

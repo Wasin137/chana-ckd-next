@@ -13,7 +13,7 @@ export default function Welcome() {
                     อยู่ระหว่างการทดสอบ หากพบปัญหาในการใช้งานกรุณาแจ้ง
                     kanokporn.kr@gmail.com
                 </CardText>
-                <Button variant="primary">CKD Clinic</Button>
+                <Button variant="primary" href='/rec'>CKD Clinic</Button>
             </CardBody>
         </Card>
     )

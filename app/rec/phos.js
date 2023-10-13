@@ -42,13 +42,13 @@ export default function Phos({lastphos, setLastphos, onSuggestionChange, fuphos,
 
     useEffect(() => {
         OutputSugphos(lastphos, prevphos)
-    }, [lastphos, prevphos])
+    }, [lastphos, prevphos, OutputSugphos])
 
     useEffect(() => {
         return () => {
             clearTimeout(btnTimeout);
         };
-    }, []);
+    }, [btnTimeout]);
 
     return (
         <>

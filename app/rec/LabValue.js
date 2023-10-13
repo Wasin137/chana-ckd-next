@@ -143,7 +143,8 @@ export default function LabValue({
         curpthValue,
         curhbValue,
         curuacrValue,
-        curfbsValue
+        curfbsValue,
+        CollectLab
     ])
 
     useEffect(() => {
@@ -157,14 +158,15 @@ export default function LabValue({
         fuphosValue,
         fupthValue,
         fuhbValue,
-        fuuacrValue
+        fuuacrValue,
+        FollowUp
     ])
     
     useEffect(() => {
         return () => {
             clearTimeout(btnTimeout);
         };
-    }, []);
+    }, [btnTimeout]);
 
     return (
         <>

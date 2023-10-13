@@ -50,13 +50,13 @@ export default function Gfr({ lastgfr, setLastgfr, onSuggestionChange, fugfr, se
 
     useEffect(() => {
         OutputSuggfr(lastgfr, prevgfr)
-    }, [lastgfr, prevgfr])
+    }, [lastgfr, prevgfr, OutputSuggfr])
 
     useEffect(() => {
         return () => {
             clearTimeout(btnTimeout);
         };
-    }, []);
+    }, [btnTimeout]);
 
     return (
         <>

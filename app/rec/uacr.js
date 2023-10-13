@@ -42,13 +42,13 @@ export default function Uacr({lastuacr, setLastuacr, onSuggestionChange, fuuacr,
 
     useEffect(() => {
         OutputSuguacr(lastuacr, prevuacr)
-    }, [lastuacr, prevuacr])
+    }, [lastuacr, prevuacr, OutputSuguacr])
 
     useEffect(() => {
         return () => {
             clearTimeout(btnTimeout);
         };
-    }, []);
+    }, [btnTimeout]);
 
     return (
         <>

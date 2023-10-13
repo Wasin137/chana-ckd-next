@@ -42,13 +42,13 @@ export default function Co2({lastco2, setLastco2, onSuggestionChange, fuco2, set
 
     useEffect(() => {
         OutputSugco2(lastco2, prevco2)
-    }, [lastco2, prevco2])
+    }, [lastco2, prevco2, OutputSugco2])
 
     useEffect(() => {
         return () => {
             clearTimeout(btnTimeout);
         };
-    }, []);
+    }, [btnTimeout]);
 
     return (
         <>

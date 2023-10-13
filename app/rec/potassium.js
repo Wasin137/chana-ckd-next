@@ -47,13 +47,13 @@ export default function Potassium({lastk, setLastk, onSuggestionChange, fuk, set
 
     useEffect(() => {
         Outputsugk(lastk, prevk)
-    }, [lastk, prevk])
+    }, [lastk, prevk, Outputsugk])
 
     useEffect(() => {
         return () => {
             clearTimeout(btnTimeout);
         };
-    }, []);
+    }, [btnTimeout]);
 
     return (
         <>

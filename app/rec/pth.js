@@ -42,13 +42,13 @@ export default function Pth({lastpth, setLastpth, onSuggestionChange, fupth, set
 
     useEffect(() => {
         OutputSugpth(lastpth, prevpth)
-    }, [lastpth, prevpth])
+    }, [lastpth, prevpth, OutputSugpth])
 
     useEffect(() => {
         return () => {
             clearTimeout(btnTimeout);
         };
-    }, []);
+    }, [btnTimeout]);
 
     return (
         <>

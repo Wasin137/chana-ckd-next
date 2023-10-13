@@ -42,13 +42,13 @@ export default function Cal({lastcal, setLastcal, onSuggestionChange, fucal, set
 
     useEffect(() => {
         OutputSugCal(lastcal, prevcal)
-    }, [lastcal, prevcal])
+    }, [lastcal, prevcal, OutputSugCal])
 
     useEffect(() => {
         return () => {
             clearTimeout(btnTimeout);
         };
-    }, []);
+    }, [btnTimeout]);
 
     return (
         <>
