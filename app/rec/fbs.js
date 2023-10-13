@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import { Row, Col, Form, InputGroup } from 'react-bootstrap'
 
-export default function fbs({ lastfbs, setLastfbs}) {
+export default function Fbs({ lastfbs, setLastfbs}) {
     const [prevfbs, setPrevfbs] = useState('')
 
     const InputLastfbs = (event) =>{

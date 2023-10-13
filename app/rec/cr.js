@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Row, Col, Form, InputGroup } from 'react-bootstrap'
 import Image from 'next/image'
 
-export default function cr({ lastcr, setLastcr, onSuggestionChange, fucr, setFucr }) {
+export default function Cr({ lastcr, setLastcr, onSuggestionChange, fucr, setFucr }) {
     const [prevcr, setPrevcr] = useState(0.5)
     const [diffcr, setDiffcr] = useState('')
     const [sugcr, setsugcr] = useState('')

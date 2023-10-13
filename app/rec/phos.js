@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Row, Col, Form, InputGroup } from 'react-bootstrap'
 import Image from 'next/image'
 
-export default function phos({lastphos, setLastphos, onSuggestionChange, fuphos, setFuphos }) {
+export default function Phos({lastphos, setLastphos, onSuggestionChange, fuphos, setFuphos }) {
     const [prevphos, setPrevphos] = useState(10)
     const [diffphos, setDiffphos] = useState('')
     const [sugphos, setSugphos] = useState('')

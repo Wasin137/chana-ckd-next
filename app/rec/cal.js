@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Row, Col, Form, InputGroup } from 'react-bootstrap'
 import Image from 'next/image'
 
-export default function cal({lastcal, setLastcal, onSuggestionChange, fucal, setFucal }) {
+export default function Cal({lastcal, setLastcal, onSuggestionChange, fucal, setFucal }) {
     const [prevcal, setPrevcal] = useState('')
     const [diffcal, setDiffcal] = useState('')
     const [sugcal, setSugcal] = useState('')

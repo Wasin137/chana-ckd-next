@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Row, Col, Form, InputGroup } from 'react-bootstrap'
 import Image from 'next/image'
 
-export default function pth({lastpth, setLastpth, onSuggestionChange, fupth, setFupth }) {
+export default function Pth({lastpth, setLastpth, onSuggestionChange, fupth, setFupth }) {
     const [prevpth, setPrevpth] = useState(10)
     const [diffpth, setDiffpth] = useState('')
     const [sugpth, setSugpth] = useState('')

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Row, Col, Form, InputGroup } from 'react-bootstrap'
 import Image from 'next/image'
 
-export default function co2({lastco2, setLastco2, onSuggestionChange, fuco2, setFuco2 }) {
+export default function Co2({lastco2, setLastco2, onSuggestionChange, fuco2, setFuco2 }) {
     const [prevco2, setPrevco2] = useState('')
     const [diffco2, setDiffco2] = useState('')
     const [sugco2, setSugco2] = useState('')

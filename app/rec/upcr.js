@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import { Row, Col, Form, InputGroup } from 'react-bootstrap'
 
-export default function upcr({ lastupcr, setLastupcr}) {
+export default function Upcr({ lastupcr, setLastupcr}) {
     const [prevupcr, setPrevupcr] = useState(100)
 
     const InputLastupcr = (event) =>{

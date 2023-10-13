@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Row, Col, Form, InputGroup } from 'react-bootstrap'
 import Image from 'next/image'
 
-export default function gfr({ lastgfr, setLastgfr, onSuggestionChange, fugfr, setFugfr }) {
+export default function Gfr({ lastgfr, setLastgfr, onSuggestionChange, fugfr, setFugfr }) {
     const [prevgfr, setPrevgfr] = useState(100)
     const [diffgfr, setDiffgfr] = useState('')
     const [suggfr, setsuggfr] = useState('')

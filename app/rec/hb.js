@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Row, Col, Form, InputGroup } from 'react-bootstrap'
 import Image from 'next/image'
 
-export default function hb({lasthb, setLasthb, onSuggestionChange, fuhb, setFuhb }) {
+export default function Hb({lasthb, setLasthb, onSuggestionChange, fuhb, setFuhb }) {
     const [prevhb, setPrevhb] = useState(10)
     const [diffhb, setDiffhb] = useState('')
     const [sughb, setSughb] = useState('')

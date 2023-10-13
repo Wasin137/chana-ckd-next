@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Row, Col, Form, InputGroup } from 'react-bootstrap'
 import Image from 'next/image'
 
-export default function potassium({lastk, setLastk, onSuggestionChange, fuk, setFuk }) {
+export default function Potassium({lastk, setLastk, onSuggestionChange, fuk, setFuk }) {
     const [prevk, setPrevk] = useState(4)
     const [diffk, setDiffk] = useState('')
     const [sugk, setsugk] = useState('')

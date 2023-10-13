@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Row, Col, Form, InputGroup } from 'react-bootstrap'
 import Image from 'next/image'
 
-export default function uacr({lastuacr, setLastuacr, onSuggestionChange, fuuacr, setFuuacr }) {
+export default function Uacr({lastuacr, setLastuacr, onSuggestionChange, fuuacr, setFuuacr }) {
     const [prevuacr, setPrevuacr] = useState(10)
     const [diffuacr, setDiffuacr] = useState('')
     const [suguacr, setSuguacr] = useState('')
