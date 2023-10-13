@@ -4,7 +4,7 @@ import { Row, Col, Form, InputGroup } from 'react-bootstrap'
 import Image from 'next/image'
 
 export default function Cr({ lastcr, setLastcr, onSuggestionChange, fucr, setFucr }) {
-    const [prevcr, setPrevcr] = useState(0.5)
+    const [prevcr, setPrevcr] = useState('')
     const [diffcr, setDiffcr] = useState('')
     const [sugcr, setsugcr] = useState('')
     const [btnDisabled, setBtnDisabled] = useState(false)
@@ -19,26 +19,28 @@ export default function Cr({ lastcr, setLastcr, onSuggestionChange, fucr, setFuc
     }
 
     const Outputsugcr = useCallback((lastcr, prevcr) => {
-        if (lastcr > prevcr) {
-            const crdiff = (lastcr-prevcr)/prevcr
-            setDiffcr(`ค่า Cr ลดลง ${(crdiff*100).toFixed(2)}%`)
-            if (crdiff > 0.3){
-                const rec = 'ลด ACEI/ARB'
-                setsugcr(rec)
-                onSuggestionChange(rec)
-                setFucr(1)
-            } else {
+        if (lastcr && prevcr) {
+            if (lastcr > prevcr) {
+                const crdiff = (lastcr-prevcr)/prevcr
+                setDiffcr(`ค่า Cr ลดลง ${(crdiff*100).toFixed(2)}%`)
+                if (crdiff > 0.3){
+                    const rec = 'ลด ACEI/ARB'
+                    setsugcr(rec)
+                    onSuggestionChange(rec)
+                    setFucr(1)
+                } else {
+                    const rec = ''
+                    setsugcr(rec)
+                    onSuggestionChange(rec)
+                    setFucr('')
+                }
+            } else if (lastcr <= prevcr && sugcr != ''){
                 const rec = ''
                 setsugcr(rec)
                 onSuggestionChange(rec)
+                setDiffcr('')
                 setFucr('')
             }
-        } else if (lastcr <= prevcr && sugcr != ''){
-            const rec = ''
-            setsugcr(rec)
-            onSuggestionChange(rec)
-            setDiffcr('')
-            setFucr('')
         }
     }, [setDiffcr, setsugcr, onSuggestionChange, setFucr, sugcr])
 
@@ -54,7 +56,7 @@ export default function Cr({ lastcr, setLastcr, onSuggestionChange, fucr, setFuc
 
     return (
         <>
-            <Row className='d-flex justify-content-center align-items-center mt-2'>
+            <Row className='d-flex justify-content-center align-items-center mt-lg-2 mt-3'>
                 <Col xs={6} lg={2}>
                     <InputGroup>
                         <InputGroup.Text>Cr</InputGroup.Text>
@@ -67,8 +69,8 @@ export default function Cr({ lastcr, setLastcr, onSuggestionChange, fucr, setFuc
                         <Form.Control type='number' placeholder='ก่อนหน้า' id='prevcr' name='prevcr' onChange={InputPrevcr}/>
                     </InputGroup>
                 </Col>
-                <Col xs={12} lg={3}>
-                    <Form.Control type='text' placeholder={diffcr} id='diffcr' name='diffcr' readOnly/>
+                <Col xs={12} lg={3} className='py-1 py-lg-0'>
+                    <Form.Control type='text' placeholder={diffcr} id='diffcr' name='diffcr' readOnly disabled/>
                 </Col>
                 <Col xs={12} lg={5}>
                     <InputGroup>

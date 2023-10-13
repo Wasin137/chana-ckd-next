@@ -19,24 +19,28 @@ export default function Phos({lastphos, setLastphos, onSuggestionChange, fuphos,
     }
 
     const OutputSugphos = useCallback((lastphos, prevphos) => {
-        const phosdiff = lastphos - prevphos
-        if (phosdiff > 0) {
-            setDiffphos(`ค่า Phosphate เพิ่มขึ้น ${phosdiff}`)
-        } else if (phosdiff === 0){
-            setDiffphos('ไม่มีการเปลี่ยนแปลง')
-        } else {
-            setDiffphos(`ค่า Phosphate ลดลง ${Math.abs(phosdiff)}`)
+        if (lastphos && prevphos) {
+            const phosdiff = lastphos - prevphos
+            if (phosdiff > 0) {
+                setDiffphos(`ค่า Phosphate เพิ่มขึ้น ${phosdiff}`)
+            } else if (phosdiff === 0){
+                setDiffphos('ไม่มีการเปลี่ยนแปลง')
+            } else {
+                setDiffphos(`ค่า Phosphate ลดลง ${Math.abs(phosdiff)}`)
+            }
         }
-        if (lastphos > 4.5) {
-            const rec = 'CaCO3 (350) 1x3'
-            setSugphos(rec)
-            onSuggestionChange(rec)
-            setFuphos(3)
-        } else {
-            const rec = ''
-            setSugphos(rec)
-            onSuggestionChange(rec)
-            setFuphos('')
+        if (lastphos){
+            if (lastphos > 4.5) {
+                const rec = 'CaCO3 (350) 1x3'
+                setSugphos(rec)
+                onSuggestionChange(rec)
+                setFuphos(3)
+            } else {
+                const rec = ''
+                setSugphos(rec)
+                onSuggestionChange(rec)
+                setFuphos('')
+            }
         }
     }, [setDiffphos, setSugphos, onSuggestionChange, setFuphos])
 
@@ -52,7 +56,7 @@ export default function Phos({lastphos, setLastphos, onSuggestionChange, fuphos,
 
     return (
         <>
-            <Row className='d-flex justify-content-center align-items-center mt-2'>
+            <Row className='d-flex justify-content-center align-items-center mt-lg-2 mt-3'>
                 <Col xs={6} lg={2}>
                     <InputGroup>
                         <InputGroup.Text>PO4</InputGroup.Text>
@@ -65,8 +69,8 @@ export default function Phos({lastphos, setLastphos, onSuggestionChange, fuphos,
                         <Form.Control type='number' placeholder='ก่อนหน้า' id='prevphos' name='prevphos' onChange={InputPrevphos}/>
                     </InputGroup>
                 </Col>
-                <Col xs={12} lg={3}>
-                    <Form.Control type='text' placeholder={diffphos} id='diffphos' name='diffphos' readOnly/>
+                <Col xs={12} lg={3} className='py-1 py-lg-0'>
+                    <Form.Control type='text' placeholder={diffphos} id='diffphos' name='diffphos' readOnly disabled/>
                 </Col>
                 <Col xs={12} lg={5}>
                     <InputGroup>

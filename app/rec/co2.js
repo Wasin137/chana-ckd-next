@@ -19,24 +19,28 @@ export default function Co2({lastco2, setLastco2, onSuggestionChange, fuco2, set
     }
 
     const OutputSugco2 = useCallback((lastco2, prevco2) => {
-        const co2diff = lastco2 - prevco2
-        if (co2diff > 0) {
-            setDiffco2(`ค่า CO2 เพิ่มขึ้น ${co2diff}`)
-        } else if (co2diff === 0){
-            setDiffco2('ไม่มีการเปลี่ยนแปลง')
-        } else {
-            setDiffco2(`ค่า CO2 ลดลง ${Math.abs(co2diff)}`)
+        if (lastco2 && prevco2){
+            const co2diff = lastco2 - prevco2
+            if (co2diff > 0) {
+                setDiffco2(`ค่า CO2 เพิ่มขึ้น ${co2diff}`)
+            } else if (co2diff === 0){
+                setDiffco2('ไม่มีการเปลี่ยนแปลง')
+            } else {
+                setDiffco2(`ค่า CO2 ลดลง ${Math.abs(co2diff)}`)
+            }
         }
-        if (lastco2 < 22) {
-            const rec = `Sodamint ${22-lastco2} tab`
-            setSugco2(rec)
-            onSuggestionChange(rec)
-            setFuco2(1)
-        } else {
-            const rec = ''
-            setSugco2(rec)
-            onSuggestionChange(rec)
-            setFuco2('')
+        if (lastco2) {
+            if (lastco2 < 22) {
+                const rec = `Sodamint ${22-lastco2} tab`
+                setSugco2(rec)
+                onSuggestionChange(rec)
+                setFuco2(1)
+            } else {
+                const rec = ''
+                setSugco2(rec)
+                onSuggestionChange(rec)
+                setFuco2('')
+            }
         }
     }, [setDiffco2, setSugco2, onSuggestionChange, setFuco2])
 
@@ -52,7 +56,7 @@ export default function Co2({lastco2, setLastco2, onSuggestionChange, fuco2, set
 
     return (
         <>
-            <Row className='d-flex justify-content-center align-items-center mt-2'>
+            <Row className='d-flex justify-content-center align-items-center mt-lg-2 mt-3'>
                 <Col xs={6} lg={2}>
                     <InputGroup>
                         <InputGroup.Text>CO2</InputGroup.Text>
@@ -65,8 +69,8 @@ export default function Co2({lastco2, setLastco2, onSuggestionChange, fuco2, set
                         <Form.Control type='number' placeholder='ก่อนหน้า' id='prevco2' name='prevco2' onChange={InputPrevco2}/>
                     </InputGroup>
                 </Col>
-                <Col xs={12} lg={3}>
-                    <Form.Control type='text' placeholder={diffco2} id='diffco2' name='diffco2' readOnly/>
+                <Col xs={12} lg={3} className='py-1 py-lg-0'>
+                    <Form.Control type='text' placeholder={diffco2} id='diffco2' name='diffco2' readOnly disabled/>
                 </Col>
                 <Col xs={12} lg={5}>
                     <InputGroup>

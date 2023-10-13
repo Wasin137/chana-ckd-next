@@ -1,6 +1,6 @@
 'use client'
 import React ,{ useState } from 'react'
-import {  Row, Col } from 'react-bootstrap'
+import { Row, Col, Button } from 'react-bootstrap'
 
 import LabValue from './LabValue'
 import Gfr from './gfr'
@@ -58,81 +58,103 @@ export default function Page() {
     // FBS
     const [lastfbs, setLastfbs] = useState('')
 
+    const handleRefresh = () => {
+        window.location.reload()
+    }
+
     return (
-        <div className='container-sm-fluid container-md'>
-            <Row className='mt-2'>
+        <div className='container-sm-fluid container-lg'>
+            <Row className='d-none d-lg-block mt-2'>
+                <Col lg={9}>
+                    <Row>
+                        <Col lg={2}>
+                            <p className='text-center fw-bold'>ผล Lab ล่าสุด</p>
+                        </Col>
+                        <Col lg={2}>
+                            <p className='text-center fw-bold'>ผล Lab ก่อนหน้านี้</p>
+                        </Col>
+                        <Col lg={3}>
+                            <p className='text-center fw-bold'>ผลต่าง</p>
+                        </Col>
+                        <Col lg={5}>
+                            <p className='text-center fw-bold'>คำแนะนำ</p>
+                        </Col>
+                    </Row>
+                </Col>
+            </Row>
+            <Row className='mt-2 mt-lg-0'>
                 <Col xs={12} lg={9}>
-                    <Gfr 
-                        onSuggestionChange={setSuggfrFromGfr}
-                        lastgfr={lastgfr}
-                        setLastgfr={setLastgfr}
-                        fugfr={fugfr}
-                        setFugfr={setFugfr}
-                    />
-                    <Cr 
-                        onSuggestionChange={setSugcrFromCr}
-                        lastcr={lastcr}
-                        setLastcr = {setLastcr}
-                        fucr={fucr}
-                        setFucr={setFucr}
-                    />
-                    <Upcr
-                        lastupcr={lastupcr}
-                        setLastupcr={setLastupcr}
-                    />
-                    <Potassium 
-                        onSuggestionChange={setSugkFromK}
-                        lastk={lastk}
-                        setLastk={setLastk}
-                        fuk={fuk}
-                        setFuk={setFuk}
-                    />
-                    <Co2 
-                        onSuggestionChange={setSugco2Fromco2}
-                        lastco2={lastco2}
-                        setLastco2={setLastco2}
-                        fuco2={fuco2}
-                        setFuco2={setFuco2}
-                    />
-                    <Cal
-                        onSuggestionChange={setSugcalFromcal}
-                        lastcal={lastcal}
-                        setLastcal={setLastcal}
-                        fucal={fucal}
-                        setFucal={setFucal}
-                    />
-                    <Phos
-                        onSuggestionChange={setSugphosFromphos}
-                        lastphos={lastphos}
-                        setLastphos={setLastphos}
-                        fuphos={fuphos}
-                        setFuphos={setFuphos}
-                    />
-                    <Pth
-                        onSuggestionChange={setSugpthFrompth}
-                        lastpth={lastpth}
-                        setLastpth={setLastpth}
-                        fupth={fupth}
-                        setFupth={setFupth}
-                    />
-                    <Hb
-                        onSuggestionChange={setSughbFromhb}
-                        lasthb={lasthb}
-                        setLasthb={setLasthb}
-                        fuhb={fuhb}
-                        setFuhb={setFuhb}
-                    />
-                    <Uacr
-                        onSuggestionChange={setSuguacrFromuacr}
-                        lastuacr={lastuacr}
-                        setLastuacr={setLastuacr}
-                        fuuacr={fuuacr}
-                        setFuuacr={setFuuacr}
-                    />
-                    <Fbs
-                        lastfbs={lastfbs}
-                        setLastfbs={setLastfbs}
-                    />
+                        <Gfr 
+                            onSuggestionChange={setSuggfrFromGfr}
+                            lastgfr={lastgfr}
+                            setLastgfr={setLastgfr}
+                            fugfr={fugfr}
+                            setFugfr={setFugfr}
+                        />
+                        <Cr 
+                            onSuggestionChange={setSugcrFromCr}
+                            lastcr={lastcr}
+                            setLastcr = {setLastcr}
+                            fucr={fucr}
+                            setFucr={setFucr}
+                        />
+                        <Upcr
+                            lastupcr={lastupcr}
+                            setLastupcr={setLastupcr}
+                        />
+                        <Potassium 
+                            onSuggestionChange={setSugkFromK}
+                            lastk={lastk}
+                            setLastk={setLastk}
+                            fuk={fuk}
+                            setFuk={setFuk}
+                        />
+                        <Co2 
+                            onSuggestionChange={setSugco2Fromco2}
+                            lastco2={lastco2}
+                            setLastco2={setLastco2}
+                            fuco2={fuco2}
+                            setFuco2={setFuco2}
+                        />
+                        <Cal
+                            onSuggestionChange={setSugcalFromcal}
+                            lastcal={lastcal}
+                            setLastcal={setLastcal}
+                            fucal={fucal}
+                            setFucal={setFucal}
+                        />
+                        <Phos
+                            onSuggestionChange={setSugphosFromphos}
+                            lastphos={lastphos}
+                            setLastphos={setLastphos}
+                            fuphos={fuphos}
+                            setFuphos={setFuphos}
+                        />
+                        <Pth
+                            onSuggestionChange={setSugpthFrompth}
+                            lastpth={lastpth}
+                            setLastpth={setLastpth}
+                            fupth={fupth}
+                            setFupth={setFupth}
+                        />
+                        <Hb
+                            onSuggestionChange={setSughbFromhb}
+                            lasthb={lasthb}
+                            setLasthb={setLasthb}
+                            fuhb={fuhb}
+                            setFuhb={setFuhb}
+                        />
+                        <Uacr
+                            onSuggestionChange={setSuguacrFromuacr}
+                            lastuacr={lastuacr}
+                            setLastuacr={setLastuacr}
+                            fuuacr={fuuacr}
+                            setFuuacr={setFuuacr}
+                        />
+                        <Fbs
+                            lastfbs={lastfbs}
+                            setLastfbs={setLastfbs}
+                        />
                 </Col>
                 <Col xs={12} lg={3}>
                     <LabValue 
@@ -160,7 +182,10 @@ export default function Page() {
                     
                 </Col>
             </Row>
-            <Row>
+            <Row className='justify-content-center mt-1'>
+                <Button variant='secondary' onClick={handleRefresh} style={{ width: 'auto' }}>Reset</Button>
+            </Row>
+            <Row className='mt-1'>
                 <hr />
                 <p className='text-center fst-italic'>พบปัญหาจากการใช้งานกรุณาติดต่อ: kanokporn.kr@gmail.com</p>
             </Row>

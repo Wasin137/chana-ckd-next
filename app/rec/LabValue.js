@@ -192,10 +192,7 @@ export default function LabValue({
 
     return (
         <>
-            <Row>
-                <p className='text-center'>วันที่ {formattedDate}</p>
-            </Row>
-            <Row>
+            <Row className='mt-2'>
                 <Table striped bordered hover size='sm'>
                     <thead>
                         <tr>

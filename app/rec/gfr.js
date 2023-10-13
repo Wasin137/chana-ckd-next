@@ -4,7 +4,7 @@ import { Row, Col, Form, InputGroup } from 'react-bootstrap'
 import Image from 'next/image'
 
 export default function Gfr({ lastgfr, setLastgfr, onSuggestionChange, fugfr, setFugfr }) {
-    const [prevgfr, setPrevgfr] = useState(100)
+    const [prevgfr, setPrevgfr] = useState('')
     const [diffgfr, setDiffgfr] = useState('')
     const [suggfr, setsuggfr] = useState('')
     const [btnDisabled, setBtnDisabled] = useState(false)
@@ -19,32 +19,36 @@ export default function Gfr({ lastgfr, setLastgfr, onSuggestionChange, fugfr, se
     }
 
     const OutputSuggfr = useCallback((lastgfr, prevgfr) => {
-        const diff = lastgfr - prevgfr
-        if (diff > 0) {
-            setDiffgfr(`ค่า GFR ดีขึ้น ${diff}`)
-        } else if (diff === 0){
-            setDiffgfr('ไม่มีการเปลี่ยนแปลง')
-        } else {
-            setDiffgfr(`ค่า GFR ลดลง ${Math.abs(diff)}`)
+        if (lastgfr && prevgfr){
+            const diff = lastgfr - prevgfr
+            if (diff > 0) {
+                setDiffgfr(`ค่า GFR ดีขึ้น ${diff}`)
+            } else if (diff === 0){
+                setDiffgfr('ไม่มีการเปลี่ยนแปลง')
+            } else {
+                setDiffgfr(`ค่า GFR ลดลง ${Math.abs(diff)}`)
+            }
+            if (diff < -5){
+                setFugfr(1)
+            } else {
+                setFugfr('')
+            }
         }
-        if (diff < -5){
-            setFugfr(1)
-        } else {
-            setFugfr('')
-        }
-        if (lastgfr <= 30) {
-            const rec = 'หยุด MFM'
-            setsuggfr(rec)
-            onSuggestionChange(rec)
-        } else if (lastgfr <= 45) {
-            const rec = 'ลด MFM เหลือ 1,000 mg/day'
-            setsuggfr(rec)
-            onSuggestionChange(rec)
-        } else {
-            const rec = ''
-            setsuggfr(rec)
-            onSuggestionChange(rec)
-
+        if (lastgfr){
+            if (lastgfr <= 30) {
+                const rec = 'หยุด MFM'
+                setsuggfr(rec)
+                onSuggestionChange(rec)
+            } else if (lastgfr <= 45) {
+                const rec = 'ลด MFM เหลือ 1,000 mg/day'
+                setsuggfr(rec)
+                onSuggestionChange(rec)
+            } else {
+                const rec = ''
+                setsuggfr(rec)
+                onSuggestionChange(rec)
+    
+            }
         }
     }, [setDiffgfr, setsuggfr, onSuggestionChange, setFugfr])
 
@@ -60,7 +64,7 @@ export default function Gfr({ lastgfr, setLastgfr, onSuggestionChange, fugfr, se
 
     return (
         <>
-            <Row className='d-flex justify-content-center align-items-center mt-2'>
+            <Row className='d-flex justify-content-center align-items-center mt-lg-2 mt-3'>
                 <Col xs={6} lg={2}>
                     <InputGroup>
                         <InputGroup.Text>eGFR</InputGroup.Text>
@@ -73,8 +77,8 @@ export default function Gfr({ lastgfr, setLastgfr, onSuggestionChange, fugfr, se
                         <Form.Control type='number' placeholder='ก่อนหน้า' id='prevgfr' name='prevgfr' onChange={InputPrevgfr}/>
                     </InputGroup>
                 </Col>
-                <Col xs={12} lg={3}>
-                    <Form.Control type='text' placeholder={diffgfr} id='diffgfr' name='diffgfr' readOnly/>
+                <Col xs={12} lg={3} className='py-1 py-lg-0'>
+                    <Form.Control type='text' placeholder={diffgfr} id='diffgfr' name='diffgfr' readOnly disabled/>
                 </Col>
                 <Col xs={12} lg={5}>
                     <InputGroup>

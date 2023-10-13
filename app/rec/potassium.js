@@ -4,7 +4,7 @@ import { Row, Col, Form, InputGroup } from 'react-bootstrap'
 import Image from 'next/image'
 
 export default function Potassium({lastk, setLastk, onSuggestionChange, fuk, setFuk }) {
-    const [prevk, setPrevk] = useState(4)
+    const [prevk, setPrevk] = useState('')
     const [diffk, setDiffk] = useState('')
     const [sugk, setsugk] = useState('')
     const [btnDisabled, setBtnDisabled] = useState(false)
@@ -19,29 +19,33 @@ export default function Potassium({lastk, setLastk, onSuggestionChange, fuk, set
     }
 
     const Outputsugk = useCallback((lastk, prevk) => {
-        const kdiff = lastk - prevk
-        if (kdiff > 0) {
-            setDiffk(`ค่า Potassium เพิ่มขึ้น ${kdiff}`)
-        } else if (kdiff === 0){
-            setDiffk('ไม่มีการเปลี่ยนแปลง')
-        } else {
-            setDiffk(`ค่า Potassuium ลดลง ${Math.abs(kdiff)}`)
+        if (lastk && prevk){
+            const kdiff = lastk - prevk
+            if (kdiff > 0) {
+                setDiffk(`ค่า Potassium เพิ่มขึ้น ${kdiff}`)
+            } else if (kdiff === 0){
+                setDiffk('ไม่มีการเปลี่ยนแปลง')
+            } else {
+                setDiffk(`ค่า Potassium ลดลง ${Math.abs(kdiff)}`)
+            }
         }
-        if (lastk < 3.5) {
-            const rec = 'KCL Elixir'
-            setsugk(rec)
-            onSuggestionChange(rec)
-            setFuk(1)
-        } else if (lastk > 5.5){
-            const rec = 'ลด ACEI/ARB'
-            setsugk(rec)
-            onSuggestionChange(rec)
-            setFuk(1)
-        } else {
-            const rec = ''
-            setsugk(rec)
-            onSuggestionChange(rec)
-            setFuk('')
+        if (lastk) {
+            if (lastk < 3.5) {
+                const rec = 'KCL Elixir'
+                setsugk(rec)
+                onSuggestionChange(rec)
+                setFuk(1)
+            } else if (lastk > 5.5){
+                const rec = 'ลด ACEI/ARB'
+                setsugk(rec)
+                onSuggestionChange(rec)
+                setFuk(1)
+            } else {
+                const rec = ''
+                setsugk(rec)
+                onSuggestionChange(rec)
+                setFuk('')
+            }
         }
     }, [setDiffk, setsugk, onSuggestionChange, setFuk])
 
@@ -57,7 +61,7 @@ export default function Potassium({lastk, setLastk, onSuggestionChange, fuk, set
 
     return (
         <>
-            <Row className='d-flex justify-content-center align-items-center mt-2'>
+            <Row className='d-flex justify-content-center align-items-center mt-lg-2 mt-3'>
                 <Col xs={6} lg={2}>
                     <InputGroup>
                         <InputGroup.Text>K</InputGroup.Text>
@@ -70,8 +74,8 @@ export default function Potassium({lastk, setLastk, onSuggestionChange, fuk, set
                         <Form.Control type='number' placeholder='ก่อนหน้า' id='prevk' name='prevk' onChange={InputPrevk}/>
                     </InputGroup>
                 </Col>
-                <Col xs={12} lg={3}>
-                    <Form.Control type='text' placeholder={diffk} id='diffk' name='diffk' readOnly/>
+                <Col xs={12} lg={3} className='py-1 py-lg-0'>
+                    <Form.Control type='text' placeholder={diffk} id='diffk' name='diffk' readOnly disabled/>
                 </Col>
                 <Col xs={12} lg={5}>
                     <InputGroup>

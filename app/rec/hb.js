@@ -19,24 +19,28 @@ export default function Hb({lasthb, setLasthb, onSuggestionChange, fuhb, setFuhb
     }
 
     const OutputSughb = useCallback((lasthb, prevhb) => {
-        const hbdiff = lasthb - prevhb
-        if (hbdiff > 0) {
-            setDiffhb(`ค่า Hb เพิ่มขึ้น ${hbdiff}`)
-        } else if (hbdiff === 0){
-            setDiffhb('ไม่มีการเปลี่ยนแปลง')
-        } else {
-            setDiffhb(`ค่า Hb ลดลง ${Math.abs(hbdiff)}`)
+        if (lasthb && prevhb) {
+            const hbdiff = lasthb - prevhb
+            if (hbdiff > 0) {
+                setDiffhb(`ค่า Hb เพิ่มขึ้น ${hbdiff}`)
+            } else if (hbdiff === 0){
+                setDiffhb('ไม่มีการเปลี่ยนแปลง')
+            } else {
+                setDiffhb(`ค่า Hb ลดลง ${Math.abs(hbdiff)}`)
+            }
         }
-        if (lasthb < 11) {
-            const rec = "ให้/เพิ่ม Ferrous+Folic"
-            setSughb(rec)
-            onSuggestionChange(rec)
-            setFuhb(3)
-        } else {
-            const rec = ''
-            setSughb(rec)
-            onSuggestionChange(rec)
-            setFuhb('')
+        if (lasthb) {
+            if (lasthb < 11) {
+                const rec = "ให้/เพิ่ม Ferrous+Folic"
+                setSughb(rec)
+                onSuggestionChange(rec)
+                setFuhb(3)
+            } else {
+                const rec = ''
+                setSughb(rec)
+                onSuggestionChange(rec)
+                setFuhb('')
+            }
         }
     }, [setDiffhb, setSughb, onSuggestionChange, setFuhb])
 
@@ -52,7 +56,7 @@ export default function Hb({lasthb, setLasthb, onSuggestionChange, fuhb, setFuhb
 
     return (
         <>
-            <Row className='d-flex justify-content-center align-items-center mt-2'>
+            <Row className='d-flex justify-content-center align-items-center mt-lg-2 mt-3'>
                 <Col xs={6} lg={2}>
                     <InputGroup>
                         <InputGroup.Text>Hb</InputGroup.Text>
@@ -65,8 +69,8 @@ export default function Hb({lasthb, setLasthb, onSuggestionChange, fuhb, setFuhb
                         <Form.Control type='number' placeholder='ก่อนหน้า' id='prevhb' name='prevhb' onChange={InputPrevhb}/>
                     </InputGroup>
                 </Col>
-                <Col xs={12} lg={3}>
-                    <Form.Control type='text' placeholder={diffhb} id='diffhb' name='diffhb' readOnly/>
+                <Col xs={12} lg={3} className='py-1 py-lg-0'>
+                    <Form.Control type='text' placeholder={diffhb} id='diffhb' name='diffhb' readOnly disabled/>
                 </Col>
                 <Col xs={12} lg={5}>
                     <InputGroup>

@@ -19,24 +19,28 @@ export default function Pth({lastpth, setLastpth, onSuggestionChange, fupth, set
     }
 
     const OutputSugpth = useCallback((lastpth, prevpth) => {
-        const pthdiff = lastpth - prevpth
-        if (pthdiff > 0) {
-            setDiffpth(`ค่า PTH เพิ่มขึ้น ${pthdiff}`)
-        } else if (pthdiff === 0){
-            setDiffpth('ไม่มีการเปลี่ยนแปลง')
-        } else {
-            setDiffpth(`ค่า PTH ลดลง ${Math.abs(pthdiff)}`)
+        if (lastpth && prevpth) {
+            const pthdiff = lastpth - prevpth
+            if (pthdiff > 0) {
+                setDiffpth(`ค่า PTH เพิ่มขึ้น ${pthdiff}`)
+            } else if (pthdiff === 0){
+                setDiffpth('ไม่มีการเปลี่ยนแปลง')
+            } else {
+                setDiffpth(`ค่า PTH ลดลง ${Math.abs(pthdiff)}`)
+            }
         }
-        if (lastpth > 150) {
-            const rec = 'Vit D3 1x1 วันเว้นวัน'
-            setSugpth(rec)
-            onSuggestionChange(rec)
-            setFupth(12)
-        } else {
-            const rec = ''
-            setSugpth(rec)
-            onSuggestionChange(rec)
-            setFupth('')
+        if (lastpth) {
+            if (lastpth > 150) {
+                const rec = 'Vit D3 1x1 วันเว้นวัน'
+                setSugpth(rec)
+                onSuggestionChange(rec)
+                setFupth(12)
+            } else {
+                const rec = ''
+                setSugpth(rec)
+                onSuggestionChange(rec)
+                setFupth('')
+            }
         }
     }, [setDiffpth, setSugpth, onSuggestionChange, setFupth])
 
@@ -52,7 +56,7 @@ export default function Pth({lastpth, setLastpth, onSuggestionChange, fupth, set
 
     return (
         <>
-            <Row className='d-flex justify-content-center align-items-center mt-2'>
+            <Row className='d-flex justify-content-center align-items-center mt-lg-2 mt-3'>
                 <Col xs={6} lg={2}>
                     <InputGroup>
                         <InputGroup.Text>PTH</InputGroup.Text>
@@ -65,8 +69,8 @@ export default function Pth({lastpth, setLastpth, onSuggestionChange, fupth, set
                         <Form.Control type='number' placeholder='ก่อนหน้า' id='prevpth' name='prevpth' onChange={InputPrevpth}/>
                     </InputGroup>
                 </Col>
-                <Col xs={12} lg={3}>
-                    <Form.Control type='text' placeholder={diffpth} id='diffpth' name='diffpth' readOnly/>
+                <Col xs={12} lg={3} className='py-1 py-lg-0'>
+                    <Form.Control type='text' placeholder={diffpth} id='diffpth' name='diffpth' readOnly disabled/>
                 </Col>
                 <Col xs={12} lg={5}>
                     <InputGroup>

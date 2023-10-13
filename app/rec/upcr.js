@@ -14,7 +14,7 @@ export default function Upcr({ lastupcr, setLastupcr}) {
     }
     return (
         <>
-            <Row className='d-flex justify-content-start align-items-center mt-2'>
+            <Row className='d-flex justify-content-start align-items-center mt-lg-2 mt-3'>
                 <Col xs={6} lg={2}>
                     <InputGroup>
                         <InputGroup.Text>UPCR</InputGroup.Text>

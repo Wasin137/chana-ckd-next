@@ -19,24 +19,28 @@ export default function Uacr({lastuacr, setLastuacr, onSuggestionChange, fuuacr,
     }
 
     const OutputSuguacr = useCallback((lastuacr, prevuacr) => {
-        const uacrdiff = lastuacr - prevuacr
-        if (uacrdiff > 0) {
-            setDiffuacr(`ค่า UACR เพิ่มขึ้น ${uacrdiff}`)
-        } else if (uacrdiff === 0){
-            setDiffuacr('ไม่มีการเปลี่ยนแปลง')
-        } else {
-            setDiffuacr(`ค่า UACR ลดลง ${Math.abs(uacrdiff)}`)
+        if (lastuacr && prevuacr) {
+            const uacrdiff = lastuacr - prevuacr
+            if (uacrdiff > 0) {
+                setDiffuacr(`ค่า UACR เพิ่มขึ้น ${uacrdiff}`)
+            } else if (uacrdiff === 0){
+                setDiffuacr('ไม่มีการเปลี่ยนแปลง')
+            } else {
+                setDiffuacr(`ค่า UACR ลดลง ${Math.abs(uacrdiff)}`)
+            }
         }
-        if (lastuacr >= 30) {
-            const rec = "ให้/เพิ่ม ACEI/ARB"
-            setSuguacr(rec)
-            onSuggestionChange(rec)
-            setFuuacr(1)
-        } else {
-            const rec = ''
-            setSuguacr(rec)
-            onSuggestionChange(rec)
-            setFuuacr('')
+        if (lastuacr) {
+            if (lastuacr >= 30) {
+                const rec = "ให้/เพิ่ม ACEI/ARB"
+                setSuguacr(rec)
+                onSuggestionChange(rec)
+                setFuuacr(1)
+            } else {
+                const rec = ''
+                setSuguacr(rec)
+                onSuggestionChange(rec)
+                setFuuacr('')
+            }
         }
     }, [setDiffuacr, setSuguacr, onSuggestionChange, setFuuacr])
 
@@ -52,7 +56,7 @@ export default function Uacr({lastuacr, setLastuacr, onSuggestionChange, fuuacr,
 
     return (
         <>
-            <Row className='d-flex justify-content-center align-items-center mt-2'>
+            <Row className='d-flex justify-content-center align-items-center mt-lg-2 mt-3'>
                 <Col xs={6} lg={2}>
                     <InputGroup>
                         <InputGroup.Text>UACR</InputGroup.Text>
@@ -65,8 +69,8 @@ export default function Uacr({lastuacr, setLastuacr, onSuggestionChange, fuuacr,
                         <Form.Control type='number' placeholder='ก่อนหน้า' id='prevuacr' name='prevuacr' onChange={InputPrevuacr}/>
                     </InputGroup>
                 </Col>
-                <Col xs={12} lg={3}>
-                    <Form.Control type='text' placeholder={diffuacr} id='diffuacr' name='diffuacr' readOnly/>
+                <Col xs={12} lg={3} className='py-1 py-lg-0'>
+                    <Form.Control type='text' placeholder={diffuacr} id='diffuacr' name='diffuacr' readOnly disabled/>
                 </Col>
                 <Col xs={12} lg={5}>
                     <InputGroup>

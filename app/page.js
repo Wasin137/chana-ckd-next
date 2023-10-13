@@ -5,7 +5,7 @@ import Welcome from './Welcome'
 
 export default function Home() {
     return (
-      <Container className='p-2'>
+      <Container className='p-2 d-flex justify-content-center'>
         <Welcome />
       </Container>
     )

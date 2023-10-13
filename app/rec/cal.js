@@ -19,24 +19,28 @@ export default function Cal({lastcal, setLastcal, onSuggestionChange, fucal, set
     }
 
     const OutputSugCal = useCallback((lastcal, prevcal) => {
-        const caldiff = lastcal - prevcal
-        if (caldiff > 0) {
-            setDiffcal(`ค่า Calcium เพิ่มขึ้น ${caldiff}`)
-        } else if (caldiff === 0){
-            setDiffcal('ไม่มีการเปลี่ยนแปลง')
-        } else {
-            setDiffcal(`ค่า Calcium ลดลง ${Math.abs(caldiff)}`)
+        if (lastcal && prevcal) {
+            const caldiff = lastcal - prevcal
+            if (caldiff > 0) {
+                setDiffcal(`ค่า Calcium เพิ่มขึ้น ${caldiff}`)
+            } else if (caldiff === 0){
+                setDiffcal('ไม่มีการเปลี่ยนแปลง')
+            } else {
+                setDiffcal(`ค่า Calcium ลดลง ${Math.abs(caldiff)}`)
+            }
         }
-        if (lastcal < 9) {
-            const rec = 'CaCO3 (1000) 1x1'
-            setSugcal(rec)
-            onSuggestionChange(rec)
-            setFucal(3)
-        } else {
-            const rec = ''
-            setSugcal(rec)
-            onSuggestionChange(rec)
-            setFucal('')
+        if (lastcal) {
+            if (lastcal < 9) {
+                const rec = 'CaCO3 (1000) 1x1'
+                setSugcal(rec)
+                onSuggestionChange(rec)
+                setFucal(3)
+            } else {
+                const rec = ''
+                setSugcal(rec)
+                onSuggestionChange(rec)
+                setFucal('')
+            }
         }
     }, [setDiffcal, setSugcal, onSuggestionChange, setFucal]);
 
@@ -52,7 +56,7 @@ export default function Cal({lastcal, setLastcal, onSuggestionChange, fucal, set
 
     return (
         <>
-            <Row className='d-flex justify-content-center align-items-center mt-2'>
+            <Row className='d-flex justify-content-center align-items-center mt-lg-2 mt-3'>
                 <Col xs={6} lg={2}>
                     <InputGroup>
                         <InputGroup.Text>Ca</InputGroup.Text>
@@ -65,8 +69,8 @@ export default function Cal({lastcal, setLastcal, onSuggestionChange, fucal, set
                         <Form.Control type='number' placeholder='ก่อนหน้า' id='prevcal' name='prevcal' onChange={InputPrevcal}/>
                     </InputGroup>
                 </Col>
-                <Col xs={12} lg={3}>
-                    <Form.Control type='text' placeholder={diffcal} id='diffcal' name='diffcal' readOnly/>
+                <Col xs={12} lg={3} className='py-1 py-lg-0'>
+                    <Form.Control type='text' placeholder={diffcal} id='diffcal' name='diffcal' readOnly disabled/>
                 </Col>
                 <Col xs={12} lg={5}>
                     <InputGroup>
