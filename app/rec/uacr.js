@@ -1,8 +1,8 @@
 'use client'
 import React, { useEffect, useState } from 'react'
-import { Row, Col, Form, Button } from 'react-bootstrap'
+import { Row, Col, Form, InputGroup } from 'react-bootstrap'
 
-export default function uacr({lastuacr, setLastuacr, onSuggestionChange }) {
+export default function uacr({lastuacr, setLastuacr, onSuggestionChange, fuuacr, setFuuacr }) {
     const [prevuacr, setPrevuacr] = useState(10)
     const [diffuacr, setDiffuacr] = useState('')
     const [suguacr, setSuguacr] = useState('')
@@ -30,10 +30,12 @@ export default function uacr({lastuacr, setLastuacr, onSuggestionChange }) {
             const rec = "ให้/เพิ่ม ACEI/ARB"
             setSuguacr(rec)
             onSuggestionChange(rec)
+            setFuuacr(1)
         } else {
             const rec = ''
             setSuguacr(rec)
             onSuggestionChange(rec)
+            setFuuacr('')
         }
     }
 
@@ -49,34 +51,47 @@ export default function uacr({lastuacr, setLastuacr, onSuggestionChange }) {
 
     return (
         <>
-            <Row className='d-flex justify-content-center align-items-center'>
-                <Col xs={2}>
-                    <Form.Label>UACR ล่าสุด</Form.Label>
-                    <Form.Control type='number' placeholder='ล่าสุด' id='lastuacr' name='lastuacr' onChange={InputLastuacr}/>
+            <Row className='d-flex justify-content-center align-items-center mt-2'>
+                <Col xs={6} lg={2}>
+                    <InputGroup>
+                        <InputGroup.Text>UACR</InputGroup.Text>
+                        <Form.Control type='number' placeholder='ล่าสุด' id='lastuacr' name='lastuacr' onChange={InputLastuacr}/>
+                    </InputGroup>
                 </Col>
-                <Col xs={2}>
-                    <Form.Label>UACR ก่อนหน้า</Form.Label>
-                    <Form.Control type='number' placeholder='ก่อนหน้า' id='prevuacr' name='prevuacr' onChange={InputPrevuacr}/>
+                <Col xs={6} lg={2}>
+                    <InputGroup>
+                        <InputGroup.Text>UACR</InputGroup.Text>
+                        <Form.Control type='number' placeholder='ก่อนหน้า' id='prevuacr' name='prevuacr' onChange={InputPrevuacr}/>
+                    </InputGroup>
                 </Col>
-                <Col xs={3}>
-                    <Form.Label>การเปลี่ยนแปลง PO4</Form.Label>
+                <Col xs={12} lg={3}>
                     <Form.Control type='text' placeholder={diffuacr} id='diffuacr' name='diffuacr' readOnly/>
                 </Col>
-                <Col xs={4}>
-                    <Form.Label>คำแนะนำ</Form.Label>
-                    <Form.Control type='text' placeholder={suguacr} id='suguacr' name='suguacr' readOnly/>
-                </Col>
-                <Col xs={1}>
-                    <Button 
-                        variant={btnDisabled ? "secondary" : "primary"}
-                        disabled={btnDisabled}
-                        onClick={() => {
-                            navigator.clipboard.writeText(suguacr)
-                            setBtnDisabled(true)
-                            btnTimeout = setTimeout(() => {
-                                setBtnDisabled(false);
-                            }, 1000)
-                        }}>{btnDisabled ? "Copied" : "Copy"}</Button>
+                <Col xs={12} lg={5}>
+                    <InputGroup>
+                        <InputGroup.Text>คำแนะนำ</InputGroup.Text>
+                        <Form.Control type='text' placeholder={suguacr} id='suguacr' name='suguacr' readOnly/>
+                        <InputGroup.Text>
+                            <div 
+                                onClick={() => {
+                                    if (!btnDisabled) {
+                                        navigator.clipboard.writeText(suguacr);
+                                        setBtnDisabled(true);
+                                        btnTimeout = setTimeout(() => {
+                                            setBtnDisabled(false);
+                                        }, 1000);
+                                    }
+                                }}
+                            >
+                                <img 
+                                    src={btnDisabled ? "/clipboard-check.svg" : "/clipboard.svg"}
+                                    alt="clipboard-icon"
+                                    width="16"
+                                    height="16"
+                                />
+                            </div>
+                        </InputGroup.Text>
+                    </InputGroup>                
                 </Col>
             </Row>
         </>

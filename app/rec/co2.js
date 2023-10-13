@@ -1,9 +1,9 @@
 'use client'
 import React, { useEffect, useState } from 'react'
-import { Row, Col, Form, Button } from 'react-bootstrap'
+import { Row, Col, Form, InputGroup } from 'react-bootstrap'
 
-export default function co2({lastco2, setLastco2, onSuggestionChange }) {
-    const [prevco2, setPrevco2] = useState(25)
+export default function co2({lastco2, setLastco2, onSuggestionChange, fuco2, setFuco2 }) {
+    const [prevco2, setPrevco2] = useState('')
     const [diffco2, setDiffco2] = useState('')
     const [sugco2, setSugco2] = useState('')
     const [btnDisabled, setBtnDisabled] = useState(false)
@@ -30,10 +30,12 @@ export default function co2({lastco2, setLastco2, onSuggestionChange }) {
             const rec = `Sodamint ${22-lastco2} tab`
             setSugco2(rec)
             onSuggestionChange(rec)
+            setFuco2(1)
         } else {
             const rec = ''
             setSugco2(rec)
             onSuggestionChange(rec)
+            setFuco2('')
         }
     }
 
@@ -49,34 +51,47 @@ export default function co2({lastco2, setLastco2, onSuggestionChange }) {
 
     return (
         <>
-            <Row className='d-flex justify-content-center align-items-center'>
-                <Col xs={2}>
-                    <Form.Label>CO2 ล่าสุด</Form.Label>
-                    <Form.Control type='number' placeholder='ล่าสุด' id='lastco2' name='lastco2' onChange={InputLastco2}/>
+            <Row className='d-flex justify-content-center align-items-center mt-2'>
+                <Col xs={6} lg={2}>
+                    <InputGroup>
+                        <InputGroup.Text>CO2</InputGroup.Text>
+                        <Form.Control type='number' placeholder='ล่าสุด' id='lastco2' name='lastco2' onChange={InputLastco2}/>
+                    </InputGroup>
                 </Col>
-                <Col xs={2}>
-                    <Form.Label>Co2 ก่อนหน้า</Form.Label>
-                    <Form.Control type='number' placeholder='ก่อนหน้า' id='prevco2' name='prevco2' onChange={InputPrevco2}/>
+                <Col xs={6} lg={2}>
+                    <InputGroup>
+                        <InputGroup.Text>CO2</InputGroup.Text>
+                        <Form.Control type='number' placeholder='ก่อนหน้า' id='prevco2' name='prevco2' onChange={InputPrevco2}/>
+                    </InputGroup>
                 </Col>
-                <Col xs={3}>
-                    <Form.Label>การเปลี่ยนแปลง CO2</Form.Label>
+                <Col xs={12} lg={3}>
                     <Form.Control type='text' placeholder={diffco2} id='diffco2' name='diffco2' readOnly/>
                 </Col>
-                <Col xs={4}>
-                    <Form.Label>คำแนะนำ</Form.Label>
-                    <Form.Control type='text' placeholder={sugco2} id='sugco2' name='sugco2' readOnly/>
-                </Col>
-                <Col xs={1}>
-                    <Button 
-                        variant={btnDisabled ? "secondary" : "primary"}
-                        disabled={btnDisabled}
-                        onClick={() => {
-                            navigator.clipboard.writeText(sugco2)
-                            setBtnDisabled(true)
-                            btnTimeout = setTimeout(() => {
-                                setBtnDisabled(false);
-                            }, 1000)
-                        }}>{btnDisabled ? "Copied" : "Copy"}</Button>
+                <Col xs={12} lg={5}>
+                    <InputGroup>
+                        <InputGroup.Text>คำแนะนำ</InputGroup.Text>
+                        <Form.Control type='text' placeholder={sugco2} id='sugco2' name='sugco2' readOnly/>
+                        <InputGroup.Text>
+                            <div 
+                                onClick={() => {
+                                    if (!btnDisabled) {
+                                        navigator.clipboard.writeText(sugco2);
+                                        setBtnDisabled(true);
+                                        btnTimeout = setTimeout(() => {
+                                            setBtnDisabled(false);
+                                        }, 1000);
+                                    }
+                                }}
+                            >
+                                <img 
+                                    src={btnDisabled ? "/clipboard-check.svg" : "/clipboard.svg"}
+                                    alt="clipboard-icon"
+                                    width="16"
+                                    height="16"
+                                />
+                            </div>
+                        </InputGroup.Text>
+                    </InputGroup>
                 </Col>
             </Row>
         </>

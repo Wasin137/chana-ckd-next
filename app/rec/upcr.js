@@ -1,6 +1,6 @@
 'use client'
 import React, { useState } from 'react'
-import { Row, Col, Form } from 'react-bootstrap'
+import { Row, Col, Form, InputGroup } from 'react-bootstrap'
 
 export default function upcr({ lastupcr, setLastupcr}) {
     const [prevupcr, setPrevupcr] = useState(100)
@@ -14,14 +14,18 @@ export default function upcr({ lastupcr, setLastupcr}) {
     }
     return (
         <>
-            <Row className='d-flex justify-content-start align-items-center'>
-                <Col xs={2}>
-                    <Form.Label>UPCR ล่าสุด</Form.Label>
-                    <Form.Control type='number' placeholder='ล่าสุด' id='lastupcr' name='lastupcr' onChange={InputLastupcr}/>
+            <Row className='d-flex justify-content-start align-items-center mt-2'>
+                <Col xs={6} lg={2}>
+                    <InputGroup>
+                        <InputGroup.Text>UPCR</InputGroup.Text>
+                        <Form.Control type='number' placeholder='ล่าสุด' id='lastupcr' name='lastupcr' onChange={InputLastupcr}/>
+                    </InputGroup>
                 </Col>
-                <Col xs={2}>
-                    <Form.Label>UPCR ก่อนหน้า</Form.Label>
-                    <Form.Control type='number' placeholder='ก่อนหน้า' id='prevupcr' name='prevupcr' onChange={InputPrevupcr}/>
+                <Col xs={6} lg={2}>
+                    <InputGroup>
+                        <InputGroup.Text>UPCR</InputGroup.Text>
+                        <Form.Control type='number' placeholder='ก่อนหน้า' id='prevupcr' name='prevupcr' onChange={InputPrevupcr}/>
+                    </InputGroup>
                 </Col>
             </Row>
         </>

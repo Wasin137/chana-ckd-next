@@ -1,8 +1,8 @@
 'use client'
 import React, { useEffect, useState } from 'react'
-import { Row, Col, Form, Button } from 'react-bootstrap'
+import { Row, Col, Form, InputGroup } from 'react-bootstrap'
 
-export default function gfr({ lastgfr, setLastgfr, onSuggestionChange }) {
+export default function gfr({ lastgfr, setLastgfr, onSuggestionChange, fugfr, setFugfr }) {
     const [prevgfr, setPrevgfr] = useState(100)
     const [diffgfr, setDiffgfr] = useState('')
     const [suggfr, setsuggfr] = useState('')
@@ -26,6 +26,11 @@ export default function gfr({ lastgfr, setLastgfr, onSuggestionChange }) {
         } else {
             setDiffgfr(`ค่า GFR ลดลง ${Math.abs(diff)}`)
         }
+        if (diff < -5){
+            setFugfr(1)
+        } else {
+            setFugfr('')
+        }
         if (lastgfr <= 30) {
             const rec = 'หยุด MFM'
             setsuggfr(rec)
@@ -38,6 +43,7 @@ export default function gfr({ lastgfr, setLastgfr, onSuggestionChange }) {
             const rec = ''
             setsuggfr(rec)
             onSuggestionChange(rec)
+
         }
     }
 
@@ -53,34 +59,47 @@ export default function gfr({ lastgfr, setLastgfr, onSuggestionChange }) {
 
     return (
         <>
-            <Row className='d-flex justify-content-center align-items-center'>
-                <Col xs={2}>
-                    <Form.Label>eGFR ล่าสุด</Form.Label>
-                    <Form.Control type='number' placeholder='ล่าสุด' id='lastgfr' name='lastgfr' onChange={InputLastgfr}/>
+            <Row className='d-flex justify-content-center align-items-center mt-2'>
+                <Col xs={6} lg={2}>
+                    <InputGroup>
+                        <InputGroup.Text>eGFR</InputGroup.Text>
+                        <Form.Control type='number' placeholder='ล่าสุด' id='lastgfr' name='lastgfr' onChange={InputLastgfr}/>
+                    </InputGroup>
                 </Col>
-                <Col xs={2}>
-                    <Form.Label>eGFR ก่อนหน้า</Form.Label>
-                    <Form.Control type='number' placeholder='ก่อนหน้า' id='prevgfr' name='prevgfr' onChange={InputPrevgfr}/>
+                <Col xs={6} lg={2}>
+                    <InputGroup>
+                        <InputGroup.Text>eGFR</InputGroup.Text>
+                        <Form.Control type='number' placeholder='ก่อนหน้า' id='prevgfr' name='prevgfr' onChange={InputPrevgfr}/>
+                    </InputGroup>
                 </Col>
-                <Col xs={3}>
-                    <Form.Label>การเปลี่ยนแปลง GFR</Form.Label>
+                <Col xs={12} lg={3}>
                     <Form.Control type='text' placeholder={diffgfr} id='diffgfr' name='diffgfr' readOnly/>
                 </Col>
-                <Col xs={4}>
-                    <Form.Label>คำแนะนำ</Form.Label>
-                    <Form.Control type='text' placeholder={suggfr} id='suggfr' name='suggfr' readOnly/>
-                </Col>
-                <Col xs={1}>
-                    <Button 
-                        variant={btnDisabled ? "secondary" : "primary"}
-                        disabled={btnDisabled}
-                        onClick={() => {
-                            navigator.clipboard.writeText(suggfr)
-                            setBtnDisabled(true)
-                            btnTimeout = setTimeout(() => {
-                                setBtnDisabled(false);
-                            }, 1000)
-                        }}>{btnDisabled ? "Copied" : "Copy"}</Button>
+                <Col xs={12} lg={5}>
+                    <InputGroup>
+                        <InputGroup.Text>คำแนะนำ</InputGroup.Text>
+                        <Form.Control type='text' placeholder={suggfr} id='suggfr' name='suggfr' readOnly/>
+                        <InputGroup.Text>
+                            <div 
+                                onClick={() => {
+                                    if (!btnDisabled) {
+                                        navigator.clipboard.writeText(suggfr);
+                                        setBtnDisabled(true);
+                                        btnTimeout = setTimeout(() => {
+                                            setBtnDisabled(false);
+                                        }, 1000);
+                                    }
+                                }}
+                            >
+                                <img 
+                                    src={btnDisabled ? "/clipboard-check.svg" : "/clipboard.svg"}
+                                    alt="clipboard-icon"
+                                    width="16"
+                                    height="16"
+                                />
+                            </div>
+                        </InputGroup.Text>
+                    </InputGroup>
                 </Col>
             </Row>
         </>

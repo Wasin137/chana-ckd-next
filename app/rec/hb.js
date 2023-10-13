@@ -1,8 +1,8 @@
 'use client'
 import React, { useEffect, useState } from 'react'
-import { Row, Col, Form, Button } from 'react-bootstrap'
+import { Row, Col, Form, InputGroup } from 'react-bootstrap'
 
-export default function hb({lasthb, setLasthb, onSuggestionChange }) {
+export default function hb({lasthb, setLasthb, onSuggestionChange, fuhb, setFuhb }) {
     const [prevhb, setPrevhb] = useState(10)
     const [diffhb, setDiffhb] = useState('')
     const [sughb, setSughb] = useState('')
@@ -30,10 +30,12 @@ export default function hb({lasthb, setLasthb, onSuggestionChange }) {
             const rec = "ให้/เพิ่ม Ferrous+Folic"
             setSughb(rec)
             onSuggestionChange(rec)
+            setFuhb(3)
         } else {
             const rec = ''
             setSughb(rec)
             onSuggestionChange(rec)
+            setFuhb('')
         }
     }
 
@@ -49,34 +51,47 @@ export default function hb({lasthb, setLasthb, onSuggestionChange }) {
 
     return (
         <>
-            <Row className='d-flex justify-content-center align-items-center'>
-                <Col xs={2}>
-                    <Form.Label>Hb ล่าสุด</Form.Label>
-                    <Form.Control type='number' placeholder='ล่าสุด' id='lasthb' name='lasthb' onChange={InputLasthb}/>
+            <Row className='d-flex justify-content-center align-items-center mt-2'>
+                <Col xs={6} lg={2}>
+                    <InputGroup>
+                        <InputGroup.Text>Hb</InputGroup.Text>
+                        <Form.Control type='number' placeholder='ล่าสุด' id='lasthb' name='lasthb' onChange={InputLasthb}/>
+                    </InputGroup>                
                 </Col>
-                <Col xs={2}>
-                    <Form.Label>Hb ก่อนหน้า</Form.Label>
-                    <Form.Control type='number' placeholder='ก่อนหน้า' id='prevhb' name='prevhb' onChange={InputPrevhb}/>
+                <Col xs={6} lg={2}>
+                    <InputGroup>
+                        <InputGroup.Text>Hb</InputGroup.Text>
+                        <Form.Control type='number' placeholder='ก่อนหน้า' id='prevhb' name='prevhb' onChange={InputPrevhb}/>
+                    </InputGroup>
                 </Col>
-                <Col xs={3}>
-                    <Form.Label>การเปลี่ยนแปลง PO4</Form.Label>
+                <Col xs={12} lg={3}>
                     <Form.Control type='text' placeholder={diffhb} id='diffhb' name='diffhb' readOnly/>
                 </Col>
-                <Col xs={4}>
-                    <Form.Label>คำแนะนำ</Form.Label>
-                    <Form.Control type='text' placeholder={sughb} id='sughb' name='sughb' readOnly/>
-                </Col>
-                <Col xs={1}>
-                    <Button 
-                        variant={btnDisabled ? "secondary" : "primary"}
-                        disabled={btnDisabled}
-                        onClick={() => {
-                            navigator.clipboard.writeText(sughb)
-                            setBtnDisabled(true)
-                            btnTimeout = setTimeout(() => {
-                                setBtnDisabled(false);
-                            }, 1000)
-                        }}>{btnDisabled ? "Copied" : "Copy"}</Button>
+                <Col xs={12} lg={5}>
+                    <InputGroup>
+                        <InputGroup.Text>คำแนะนำ</InputGroup.Text>
+                        <Form.Control type='text' placeholder={sughb} id='sughb' name='sughb' readOnly/>
+                        <InputGroup.Text>
+                            <div 
+                                onClick={() => {
+                                    if (!btnDisabled) {
+                                        navigator.clipboard.writeText(sughb);
+                                        setBtnDisabled(true);
+                                        btnTimeout = setTimeout(() => {
+                                            setBtnDisabled(false);
+                                        }, 1000);
+                                    }
+                                }}
+                            >
+                                <img 
+                                    src={btnDisabled ? "/clipboard-check.svg" : "/clipboard.svg"}
+                                    alt="clipboard-icon"
+                                    width="16"
+                                    height="16"
+                                />
+                            </div>
+                        </InputGroup.Text>
+                    </InputGroup>                
                 </Col>
             </Row>
         </>

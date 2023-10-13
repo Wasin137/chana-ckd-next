@@ -1,9 +1,12 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css'
+import { Container } from 'react-bootstrap'
+
+import Welcome from './Welcome'
 
 export default function Home() {
     return (
-      <>
-        <p>chana - ckd</p>
-      </>
+      <Container className='p-2'>
+        <Welcome />
+      </Container>
     )
 }

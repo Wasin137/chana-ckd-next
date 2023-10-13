@@ -1,9 +1,9 @@
 'use client'
 import React, { useState } from 'react'
-import { Row, Col, Form } from 'react-bootstrap'
+import { Row, Col, Form, InputGroup } from 'react-bootstrap'
 
 export default function fbs({ lastfbs, setLastfbs}) {
-    const [prevfbs, setPrevfbs] = useState(100)
+    const [prevfbs, setPrevfbs] = useState('')
 
     const InputLastfbs = (event) =>{
         setLastfbs(event.target.value)
@@ -14,14 +14,18 @@ export default function fbs({ lastfbs, setLastfbs}) {
     }
     return (
         <>
-            <Row className='d-flex justify-content-start align-items-center'>
-                <Col xs={2}>
-                    <Form.Label>FBS ล่าสุด</Form.Label>
-                    <Form.Control type='number' placeholder='ล่าสุด' id='lastfbs' name='lastfbs' onChange={InputLastfbs}/>
+            <Row className='d-flex justify-content-start align-items-center mt-2'>
+                <Col xs={6} lg={2}>
+                    <InputGroup>
+                        <InputGroup.Text>FBS</InputGroup.Text>
+                        <Form.Control type='number' placeholder='ล่าสุด' id='lastfbs' name='lastfbs' onChange={InputLastfbs}/>
+                    </InputGroup>
                 </Col>
-                <Col xs={2}>
-                    <Form.Label>FBS ก่อนหน้า</Form.Label>
-                    <Form.Control type='number' placeholder='ก่อนหน้า' id='prevfbs' name='prevfbs' onChange={InputPrevfbs}/>
+                <Col xs={6} lg={2}>
+                    <InputGroup>
+                        <InputGroup.Text>FBS</InputGroup.Text>
+                        <Form.Control type='number' placeholder='ก่อนหน้า' id='prevfbs' name='prevfbs' onChange={InputPrevfbs}/>
+                    </InputGroup>
                 </Col>
             </Row>
         </>

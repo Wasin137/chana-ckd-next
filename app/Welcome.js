@@ -1,0 +1,20 @@
+import React from 'react'
+import { CardBody, CardImg, CardText, CardTitle } from 'react-bootstrap'
+import Button from 'react-bootstrap/Button'
+import Card from 'react-bootstrap/Card'
+
+export default function Welcome() {
+    return (
+        <Card style={{ width: '18rem' }}>
+            <CardImg variant="top" src="/egfr.jpg"/>
+            <CardBody>
+                <CardTitle>V. 0.2</CardTitle>
+                <CardText>
+                    อยู่ระหว่างการทดสอบ หากพบปัญหาในการใช้งานกรุณาแจ้ง
+                    kanokporn.kr@gmail.com
+                </CardText>
+                <Button variant="primary">CKD Clinic</Button>
+            </CardBody>
+        </Card>
+    )
+}

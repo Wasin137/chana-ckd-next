@@ -1,8 +1,8 @@
 'use client'
 import React, { useEffect, useState } from 'react'
-import { Row, Col, Form, Button } from 'react-bootstrap'
+import { Row, Col, Form, InputGroup } from 'react-bootstrap'
 
-export default function phos({lastphos, setLastphos, onSuggestionChange }) {
+export default function phos({lastphos, setLastphos, onSuggestionChange, fuphos, setFuphos }) {
     const [prevphos, setPrevphos] = useState(10)
     const [diffphos, setDiffphos] = useState('')
     const [sugphos, setSugphos] = useState('')
@@ -30,10 +30,12 @@ export default function phos({lastphos, setLastphos, onSuggestionChange }) {
             const rec = 'CaCO3 (350) 1x3'
             setSugphos(rec)
             onSuggestionChange(rec)
+            setFuphos(3)
         } else {
             const rec = ''
             setSugphos(rec)
             onSuggestionChange(rec)
+            setFuphos('')
         }
     }
 
@@ -49,34 +51,47 @@ export default function phos({lastphos, setLastphos, onSuggestionChange }) {
 
     return (
         <>
-            <Row className='d-flex justify-content-center align-items-center'>
-                <Col xs={2}>
-                    <Form.Label>PO4 ล่าสุด</Form.Label>
-                    <Form.Control type='number' placeholder='ล่าสุด' id='lastphos' name='lastphos' onChange={InputLastphos}/>
+            <Row className='d-flex justify-content-center align-items-center mt-2'>
+                <Col xs={6} lg={2}>
+                    <InputGroup>
+                        <InputGroup.Text>PO4</InputGroup.Text>
+                        <Form.Control type='number' placeholder='ล่าสุด' id='lastphos' name='lastphos' onChange={InputLastphos}/>
+                    </InputGroup>
                 </Col>
-                <Col xs={2}>
-                    <Form.Label>PO4 ก่อนหน้า</Form.Label>
-                    <Form.Control type='number' placeholder='ก่อนหน้า' id='prevphos' name='prevphos' onChange={InputPrevphos}/>
+                <Col xs={6} lg={2}>
+                    <InputGroup>
+                        <InputGroup.Text>PO4</InputGroup.Text>
+                        <Form.Control type='number' placeholder='ก่อนหน้า' id='prevphos' name='prevphos' onChange={InputPrevphos}/>
+                    </InputGroup>
                 </Col>
-                <Col xs={3}>
-                    <Form.Label>การเปลี่ยนแปลง PO4</Form.Label>
+                <Col xs={12} lg={3}>
                     <Form.Control type='text' placeholder={diffphos} id='diffphos' name='diffphos' readOnly/>
                 </Col>
-                <Col xs={4}>
-                    <Form.Label>คำแนะนำ</Form.Label>
-                    <Form.Control type='text' placeholder={sugphos} id='sugphos' name='sugphos' readOnly/>
-                </Col>
-                <Col xs={1}>
-                    <Button 
-                        variant={btnDisabled ? "secondary" : "primary"}
-                        disabled={btnDisabled}
-                        onClick={() => {
-                            navigator.clipboard.writeText(sugphos)
-                            setBtnDisabled(true)
-                            btnTimeout = setTimeout(() => {
-                                setBtnDisabled(false);
-                            }, 1000)
-                        }}>{btnDisabled ? "Copied" : "Copy"}</Button>
+                <Col xs={12} lg={5}>
+                    <InputGroup>
+                        <InputGroup.Text>คำแนะนำ</InputGroup.Text>
+                        <Form.Control type='text' placeholder={sugphos} id='sugphos' name='sugphos' readOnly/>
+                        <InputGroup.Text>
+                            <div 
+                                onClick={() => {
+                                    if (!btnDisabled) {
+                                        navigator.clipboard.writeText(sugphos);
+                                        setBtnDisabled(true);
+                                        btnTimeout = setTimeout(() => {
+                                            setBtnDisabled(false);
+                                        }, 1000);
+                                    }
+                                }}
+                            >
+                                <img 
+                                    src={btnDisabled ? "/clipboard-check.svg" : "/clipboard.svg"}
+                                    alt="clipboard-icon"
+                                    width="16"
+                                    height="16"
+                                />
+                            </div>
+                        </InputGroup.Text>
+                    </InputGroup>                
                 </Col>
             </Row>
         </>
