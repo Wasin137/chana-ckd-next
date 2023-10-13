@@ -1,6 +1,7 @@
 'use client'
 import React, { useState, useEffect } from 'react'
 import { Row, Form, Table, InputGroup } from 'react-bootstrap'
+import Image from 'next/image';
 
 
 export default function LabValue({
@@ -203,11 +204,11 @@ export default function LabValue({
                                     }
                                 }}
                             >
-                                <img 
+                                <Image 
                                     src={btnDisabled ? "/clipboard-check.svg" : "/clipboard.svg"}
-                                    alt="clipboard-icon"
-                                    width="16"
-                                    height="16"
+                                    alt='clipboard-icon'
+                                    width={16}
+                                    height={16}
                                 />
                             </div>
                         </InputGroup.Text>

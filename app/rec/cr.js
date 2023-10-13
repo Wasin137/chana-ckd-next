@@ -1,6 +1,7 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import { Row, Col, Form, InputGroup } from 'react-bootstrap'
+import Image from 'next/image'
 
 export default function cr({ lastcr, setLastcr, onSuggestionChange, fucr, setFucr }) {
     const [prevcr, setPrevcr] = useState(0.5)
@@ -85,11 +86,11 @@ export default function cr({ lastcr, setLastcr, onSuggestionChange, fucr, setFuc
                                     }
                                 }}
                             >
-                                <img 
+                                <Image 
                                     src={btnDisabled ? "/clipboard-check.svg" : "/clipboard.svg"}
-                                    alt="clipboard-icon"
-                                    width="16"
-                                    height="16"
+                                    alt='clipboard-icon'
+                                    width={16}
+                                    height={16}
                                 />
                             </div>
                         </InputGroup.Text>

@@ -9,7 +9,7 @@ export default function Appbar() {
       <Navbar expand="lg" className="bg-body-tertiary">
         <Container fluid>
           <NavbarBrand href='/'>
-            Moji's CKD recommendation
+            Moji CKD recommendation
           </NavbarBrand>
           <NavbarToggle aria-controls='navbar-menu'/>
           <NavbarCollapse id='navbar-menu'>
