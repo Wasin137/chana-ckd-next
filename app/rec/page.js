@@ -16,7 +16,7 @@ import Uacr from './uacr'
 import Fbs from './fbs'
 
 
-export default function page() {
+export default function Page() {
     // GFR
     const [suggfrFromGfr, setSuggfrFromGfr] = useState('')
     const [lastgfr, setLastgfr] = useState('')
