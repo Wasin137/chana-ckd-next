@@ -40,7 +40,7 @@ export default function Cr({ lastcr, setLastcr, onSuggestionChange, fucr, setFuc
             setDiffcr('')
             setFucr('')
         }
-    }, [setDiffcr, setsugcr, onSuggestionChange, setFucr])
+    }, [setDiffcr, setsugcr, onSuggestionChange, setFucr, sugcr])
 
     useEffect(() => {
         Outputsugcr(lastcr, prevcr)
