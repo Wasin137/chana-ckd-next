@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import { Row, Col, Form, InputGroup } from 'react-bootstrap'
 import Image from 'next/image'
 
@@ -18,7 +18,7 @@ export default function Co2({lastco2, setLastco2, onSuggestionChange, fuco2, set
         setPrevco2(event.target.value)
     }
 
-    const OutputSugco2 = (lastco2, prevco2) => {
+    const OutputSugco2 = useCallback((lastco2, prevco2) => {
         const co2diff = lastco2 - prevco2
         if (co2diff > 0) {
             setDiffco2(`ค่า CO2 เพิ่มขึ้น ${co2diff}`)
@@ -38,7 +38,7 @@ export default function Co2({lastco2, setLastco2, onSuggestionChange, fuco2, set
             onSuggestionChange(rec)
             setFuco2('')
         }
-    }
+    }, [setDiffco2, setSugco2, onSuggestionChange, setFuco2])
 
     useEffect(() => {
         OutputSugco2(lastco2, prevco2)

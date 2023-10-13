@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import { Row, Col, Form, InputGroup } from 'react-bootstrap'
 import Image from 'next/image'
 
@@ -18,7 +18,7 @@ export default function Uacr({lastuacr, setLastuacr, onSuggestionChange, fuuacr,
         setPrevuacr(event.target.value)
     }
 
-    const OutputSuguacr = (lastuacr, prevuacr) => {
+    const OutputSuguacr = useCallback((lastuacr, prevuacr) => {
         const uacrdiff = lastuacr - prevuacr
         if (uacrdiff > 0) {
             setDiffuacr(`ค่า UACR เพิ่มขึ้น ${uacrdiff}`)
@@ -38,7 +38,7 @@ export default function Uacr({lastuacr, setLastuacr, onSuggestionChange, fuuacr,
             onSuggestionChange(rec)
             setFuuacr('')
         }
-    }
+    }, [setDiffuacr, setSuguacr, onSuggestionChange, setFuuacr])
 
     useEffect(() => {
         OutputSuguacr(lastuacr, prevuacr)

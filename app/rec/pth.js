@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import { Row, Col, Form, InputGroup } from 'react-bootstrap'
 import Image from 'next/image'
 
@@ -18,7 +18,7 @@ export default function Pth({lastpth, setLastpth, onSuggestionChange, fupth, set
         setPrevpth(event.target.value)
     }
 
-    const OutputSugpth = (lastpth, prevpth) => {
+    const OutputSugpth = useCallback((lastpth, prevpth) => {
         const pthdiff = lastpth - prevpth
         if (pthdiff > 0) {
             setDiffpth(`ค่า PTH เพิ่มขึ้น ${pthdiff}`)
@@ -38,7 +38,7 @@ export default function Pth({lastpth, setLastpth, onSuggestionChange, fupth, set
             onSuggestionChange(rec)
             setFupth('')
         }
-    }
+    }, [setDiffpth, setSugpth, onSuggestionChange, setFupth])
 
     useEffect(() => {
         OutputSugpth(lastpth, prevpth)

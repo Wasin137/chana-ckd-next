@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import { Row, Col, Form, InputGroup } from 'react-bootstrap'
 import Image from 'next/image'
 
@@ -18,7 +18,7 @@ export default function Phos({lastphos, setLastphos, onSuggestionChange, fuphos,
         setPrevphos(event.target.value)
     }
 
-    const OutputSugphos = (lastphos, prevphos) => {
+    const OutputSugphos = useCallback((lastphos, prevphos) => {
         const phosdiff = lastphos - prevphos
         if (phosdiff > 0) {
             setDiffphos(`ค่า Phosphate เพิ่มขึ้น ${phosdiff}`)
@@ -38,7 +38,7 @@ export default function Phos({lastphos, setLastphos, onSuggestionChange, fuphos,
             onSuggestionChange(rec)
             setFuphos('')
         }
-    }
+    }, [setDiffphos, setSugphos, onSuggestionChange, setFuphos])
 
     useEffect(() => {
         OutputSugphos(lastphos, prevphos)

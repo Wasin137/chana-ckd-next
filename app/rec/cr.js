@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import { Row, Col, Form, InputGroup } from 'react-bootstrap'
 import Image from 'next/image'
 
@@ -18,7 +18,7 @@ export default function Cr({ lastcr, setLastcr, onSuggestionChange, fucr, setFuc
         setPrevcr(event.target.value)
     }
 
-    const Outputsugcr = (lastcr, prevcr) => {
+    const Outputsugcr = useCallback((lastcr, prevcr) => {
         if (lastcr > prevcr) {
             const crdiff = (lastcr-prevcr)/prevcr
             setDiffcr(`ค่า Cr ลดลง ${(crdiff*100).toFixed(2)}%`)
@@ -40,7 +40,7 @@ export default function Cr({ lastcr, setLastcr, onSuggestionChange, fucr, setFuc
             setDiffcr('')
             setFucr('')
         }
-    }
+    }, [setDiffcr, setsugcr, onSuggestionChange, setFucr])
 
     useEffect(() => {
         Outputsugcr(lastcr, prevcr)

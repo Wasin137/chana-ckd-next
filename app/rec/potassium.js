@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import { Row, Col, Form, InputGroup } from 'react-bootstrap'
 import Image from 'next/image'
 
@@ -18,7 +18,7 @@ export default function Potassium({lastk, setLastk, onSuggestionChange, fuk, set
         setPrevk(event.target.value)
     }
 
-    const Outputsugk = (lastk, prevk) => {
+    const Outputsugk = useCallback((lastk, prevk) => {
         const kdiff = lastk - prevk
         if (kdiff > 0) {
             setDiffk(`ค่า Potassium เพิ่มขึ้น ${kdiff}`)
@@ -43,7 +43,7 @@ export default function Potassium({lastk, setLastk, onSuggestionChange, fuk, set
             onSuggestionChange(rec)
             setFuk('')
         }
-    }
+    }, [setDiffk, setsugk, onSuggestionChange, setFuk])
 
     useEffect(() => {
         Outputsugk(lastk, prevk)

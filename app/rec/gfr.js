@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import { Row, Col, Form, InputGroup } from 'react-bootstrap'
 import Image from 'next/image'
 
@@ -18,7 +18,7 @@ export default function Gfr({ lastgfr, setLastgfr, onSuggestionChange, fugfr, se
         setPrevgfr(event.target.value)
     }
 
-    const OutputSuggfr = (lastgfr, prevgfr) => {
+    const OutputSuggfr = useCallback((lastgfr, prevgfr) => {
         const diff = lastgfr - prevgfr
         if (diff > 0) {
             setDiffgfr(`ค่า GFR ดีขึ้น ${diff}`)
@@ -46,7 +46,7 @@ export default function Gfr({ lastgfr, setLastgfr, onSuggestionChange, fugfr, se
             onSuggestionChange(rec)
 
         }
-    }
+    }, [setDiffgfr, setsuggfr, onSuggestionChange, setFugfr])
 
     useEffect(() => {
         OutputSuggfr(lastgfr, prevgfr)

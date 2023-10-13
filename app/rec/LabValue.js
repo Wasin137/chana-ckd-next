@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect, useCallback, useMemo } from 'react'
 import { Row, Form, Table, InputGroup } from 'react-bootstrap'
 import Image from 'next/image';
 
@@ -36,7 +36,7 @@ export default function LabValue({
     const [nearestfu, setNearestfu] = useState(0)
     const [showfu, setShowfu] = useState(false)
     
-    const allLabData = [
+    const allLabData = useMemo(() => ([
         {
             text:'วันที่',
             value: formattedDate,
@@ -97,7 +97,29 @@ export default function LabValue({
             value: curfbsValue,
             fu: null
         }
-    ]
+    ]), [
+        formattedDate,
+        curgfrValue,
+        curcrValue,
+        curupcrValue,
+        curkValue,
+        curco2Value,
+        curcalValue,
+        curphosValue,
+        curpthValue,
+        curhbValue,
+        curuacrValue,
+        curfbsValue,
+        fugfrValue,
+        fucrValue,
+        fukValue,
+        fuco2Value,
+        fucalValue,
+        fuphosValue,
+        fupthValue,
+        fuhbValue,
+        fuuacrValue
+    ])
     const CollectLab = useCallback(() => {
         let result = [];
         allLabData.forEach(lab => {

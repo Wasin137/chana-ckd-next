@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import { Row, Col, Form, InputGroup } from 'react-bootstrap'
 import Image from 'next/image'
 
@@ -18,7 +18,7 @@ export default function Hb({lasthb, setLasthb, onSuggestionChange, fuhb, setFuhb
         setPrevhb(event.target.value)
     }
 
-    const OutputSughb = (lasthb, prevhb) => {
+    const OutputSughb = useCallback((lasthb, prevhb) => {
         const hbdiff = lasthb - prevhb
         if (hbdiff > 0) {
             setDiffhb(`ค่า Hb เพิ่มขึ้น ${hbdiff}`)
@@ -38,7 +38,7 @@ export default function Hb({lasthb, setLasthb, onSuggestionChange, fuhb, setFuhb
             onSuggestionChange(rec)
             setFuhb('')
         }
-    }
+    }, [setDiffhb, setSughb, onSuggestionChange, setFuhb])
 
     useEffect(() => {
         OutputSughb(lasthb, prevhb)
