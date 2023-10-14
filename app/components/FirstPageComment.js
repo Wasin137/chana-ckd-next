@@ -1,4 +1,3 @@
-'use client'
 import React from 'react'
 import { Card, CardBody, CardHeader ,CardTitle ,CardText,Col } from 'react-bootstrap'
 import Image from 'next/image'
@@ -16,6 +15,7 @@ const getComments = async () => {
     return res.json()
   } catch(error){
     console.log('Error loading comments', error)
+    return { comments: [] }
   }
 }
 
