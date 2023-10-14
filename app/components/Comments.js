@@ -1,11 +1,10 @@
 import React from 'react'
 import { Card, CardBody, CardHeader ,CardTitle ,CardText,Col } from 'react-bootstrap'
 import Image from 'next/image'
-import RemoveBtn from './RemoveBtn'
 
 const getComments = async () => {
     try {
-      const res = await fetch(`https://${process.env.VERCEL_URL}/api/comments`, {
+      const res = await fetch(`https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/comments`, {
         cache: 'no-store',
       })
   
@@ -21,6 +20,7 @@ const getComments = async () => {
 
 export default async function Comments() {
     const {comments} = await getComments()
+    console.log(comments)
 
     return (
       <>
