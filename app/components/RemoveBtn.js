@@ -9,7 +9,7 @@ export default function RemoveBtn({ id }) {
         const confirmed = confirm('Are you sure?')
 
         if (confirmed){
-            const res = await fetch(`https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/comments?id=${id}`, {
+            const res = await fetch(`https://${process.env.VERCEL_URL}/api/comments?id=${id}`, {
                 method: "DELETE",
             })
             if (res.ok){
