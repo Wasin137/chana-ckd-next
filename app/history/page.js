@@ -1,27 +1,49 @@
 import React from 'react'
-import { Accordion, AccordionHeader, AccordionItem, AccordionBody } from 'react-bootstrap'
+import { Accordion, AccordionHeader, AccordionItem, AccordionBody} from 'react-bootstrap'
+
+const updateHistory = [
+  { 
+    version: '0.1',
+    functions : [
+      'เริ่มต้นระบบทดลองภายใน',
+      'ระบบ Reccomendation พัฒนามาจาก Google sheet'
+    ]
+  },
+  {
+    version: '0.2',
+    functions : [
+      'ปรับปรุงแก้ไข ข้อผิดพลาดของการเรียก Function',
+      'Responsive design'
+    ]
+  },
+  {
+    version: '0.3',
+    functions : [
+      'เพิ่มระบบการให้คะแนน และรีวิว',
+      'ระบบจัดการสำหรับ Admin'
+    ]
+  }
+]
 
 export default function History() {
-    return (
-        <Accordion>
-          <AccordionItem eventKey="0">
-            <AccordionHeader>V 0.1</AccordionHeader>
+  const reversedHistory = [...updateHistory].reverse()
+
+  return (
+    <div className='container-fluid container-lg mt-2'>
+      <Accordion defaultActiveKey="0">
+        {reversedHistory.map((update, index) => (
+          <AccordionItem key={index} eventKey={index.toString()}>
+            <AccordionHeader>Version {update.version}</AccordionHeader>
             <AccordionBody>
                 <ul>
-                    <li>เริ่มต้นระบบทดลองภายใน</li>
-                    <li>ระบบ Reccomendation พัฒนามาจาก Google sheet</li>
+                  {update.functions.map((func, funcIndex) => (
+                    <li key={funcIndex}>{func}</li>
+                  ))}
                 </ul>
             </AccordionBody>
           </AccordionItem>
-          <AccordionItem eventKey="1">
-            <AccordionHeader>V 0.2</AccordionHeader>
-            <AccordionBody>
-                <ul>
-                    <li>ปรับปรุงแก้ไข ข้อผิดพลาดของการเรียก Function</li>
-                    <li>Responsive design</li>
-                </ul>
-            </AccordionBody>
-          </AccordionItem>
-        </Accordion>
-    );
+        ))}
+      </Accordion>
+    </div>
+  );
 }

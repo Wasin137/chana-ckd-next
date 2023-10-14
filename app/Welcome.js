@@ -8,7 +8,7 @@ export default function Welcome() {
         <Card style={{ width: '18rem' }}>
             <CardImg variant="top" src="/egfr.jpg"/>
             <CardBody>
-                <CardTitle>V. 0.2</CardTitle>
+                <CardTitle>V. 0.3</CardTitle>
                 <CardText>
                     อยู่ระหว่างการทดสอบ หากพบปัญหาในการใช้งานกรุณาแจ้ง
                     kanokporn.kr@gmail.com

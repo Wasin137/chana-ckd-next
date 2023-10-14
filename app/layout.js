@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Appbar from './Appbar';
 
 export const metadata = {
-  title: 'Moji CKD App',
+  title: 'Moji App',
   description: 'Testing version',
 }
 
