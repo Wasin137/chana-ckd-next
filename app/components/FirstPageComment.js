@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import { Card, CardBody, CardHeader ,CardTitle ,CardText,Col } from 'react-bootstrap'
 import Image from 'next/image'
