@@ -5,7 +5,7 @@ import RemoveBtn from './RemoveBtn'
 
 const getComments = async () => {
     try {
-      const res = await fetch('http://localhost:3000/api/comments/', {
+      const res = await fetch('https://chana-ckd-next.vercel.app/api/comments/', {
         cache: 'no-store',
       })
   

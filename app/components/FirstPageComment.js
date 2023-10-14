@@ -4,7 +4,7 @@ import Image from 'next/image'
 
 const getComments = async () => {
   try {
-    const res = await fetch('http://localhost:3000/api/comments/firstpage', {
+    const res = await fetch('https://chana-ckd-next.vercel.app/api/comments/firstpage', {
       cache: 'no-store',
     })
 
