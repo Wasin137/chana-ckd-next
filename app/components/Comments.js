@@ -5,7 +5,7 @@ import RemoveBtn from './RemoveBtn'
 
 const getComments = async () => {
     try {
-      const res = await fetch('/api/comments/', {
+      const res = await fetch(`https://${process.env.VERCEL_URL}/api/comments`, {
         cache: 'no-store',
       })
   

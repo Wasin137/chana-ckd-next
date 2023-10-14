@@ -26,7 +26,7 @@ export default function AddComment() {
       }
 
       try {
-        const res = await fetch('/api/comments', {
+        const res = await fetch(`https://${process.env.VERCEL_URL}/api/comments`, {
           method: "POST",
           headers: {
             "Content-type": "application/json"
@@ -37,7 +37,7 @@ export default function AddComment() {
         if (res.ok) {
           router.push('/')
         } else {
-          throw new Error('Faile to comment')
+          throw new Error('Failed to comment')
         }
       } catch (error) {
         console.log(error)
