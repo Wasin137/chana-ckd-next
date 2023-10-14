@@ -9,7 +9,7 @@ export default function page() {
             <p className='text-center fs-4'>User reviews</p>
         </Row>
         <Row className='justify-content-center'>
-                <Button href='/addComment' variant='secondary' style={{width: 'auto'}}>Leave your comment here!</Button>
+                <Button href='/addComment' variant='secondary' style={{width: 'auto'}}>Leave your comment here</Button>
         </Row>
         <Row>
             <Comments />
