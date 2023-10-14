@@ -26,7 +26,7 @@ export default function AddComment() {
       }
 
       try {
-        const res = await fetch('https://chana-ckd-next.vercel.app/api/comments', {
+        const res = await fetch('/api/comments', {
           method: "POST",
           headers: {
             "Content-type": "application/json"
