@@ -4,7 +4,7 @@ import Image from 'next/image'
 
 const getComments = async () => {
     try {
-      const res = await fetch(`https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/comments`, {
+      const res = await fetch(`http://localhost:3000/api/comments`, {
         cache: 'no-store',
       })
   
@@ -20,7 +20,6 @@ const getComments = async () => {
 
 export default async function Comments() {
     const {comments} = await getComments()
-    console.log(comments)
 
     return (
       <>
