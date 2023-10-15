@@ -10,15 +10,20 @@ export default function Appbar() {
       <Navbar expand="lg" className="bg-body-tertiary">
         <Container fluid>
           <NavbarBrand href='/'>
-            <Image src='/lightbulb.svg' alt='logo' width={32} height={32} className='mx-2'/>
+            <Image src='/lightbulb.svg' alt='logo' width={32} height={32} className='ms-2'/>
             Moji CDSS
           </NavbarBrand>
           <NavbarToggle aria-controls='navbar-menu'/>
           <NavbarCollapse id='navbar-menu'>
             <Nav className='me-auto'>
-            <NavLink href='/'>Home</NavLink>
-            <NavLink href='/rec'>CKD (CDSS)</NavLink>
-            <NavLink href='/viewcomments'>Comment</NavLink>
+              <NavLink href='/'>Home</NavLink>
+              <NavLink href='/rec'>CKD (CDSS)</NavLink>
+              <NavLink href='/viewcomments'>Comment</NavLink>
+            </Nav>
+            <Nav className='ml-auto'>
+              <NavLink href='/managecomments'>
+                <Image src='/person-circle.svg' alt='admiin' width={32} height={32} className='me-2'/>
+              </NavLink>
             </Nav>
           </NavbarCollapse>
         </Container>

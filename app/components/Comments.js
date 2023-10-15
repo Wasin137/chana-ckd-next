@@ -37,7 +37,9 @@ export default async function Comments() {
                   {new Date(c.createdAt).toLocaleDateString('th-TH', {
                       day: '2-digit',
                       month: '2-digit',
-                      year: 'numeric'
+                      year: 'numeric',
+                      hour: '2-digit',
+                      minute: '2-digit'
                   })}
                    {session ? <RemoveBtn id={c._id} /> : null}
                 </CardHeader>
