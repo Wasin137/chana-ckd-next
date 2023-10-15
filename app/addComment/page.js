@@ -4,7 +4,7 @@ import { Form, Button, Row, Col, Container, InputGroup } from 'react-bootstrap';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
-const baseUrl_api = "https://chana-ckd-api.vercel.app/"
+const baseUrl_api = "https://chana-ckd-api.vercel.app"
 
 export default function AddComment() {
     const [rating, setRating] = useState(0);

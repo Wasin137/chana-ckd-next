@@ -3,7 +3,7 @@ import React from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 
-const baseUrl_api = "https://chana-ckd-api.vercel.app/"
+const baseUrl_api = "https://chana-ckd-api.vercel.app"
 
 export default function RemoveBtn({ id }) {
     const router = useRouter()
