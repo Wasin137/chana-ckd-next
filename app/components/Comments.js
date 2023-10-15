@@ -2,9 +2,11 @@ import React from 'react'
 import { Card, CardBody, CardHeader ,CardTitle ,CardText,Col } from 'react-bootstrap'
 import Image from 'next/image'
 
+const baseUrl_api = "https://chana-ckd-api.vercel.app/"
+
 const getComments = async () => {
     try {
-      const res = await fetch(`https://${process.env.VERCEL_URL}/api/comments`, {
+      const res = await fetch(`${baseUrl_api}/api/comments`, {
         cache: 'no-store',
       })
   

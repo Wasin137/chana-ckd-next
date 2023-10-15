@@ -4,6 +4,8 @@ import { Form, Button, Row, Col, Container, InputGroup } from 'react-bootstrap';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
+const baseUrl_api = "https://chana-ckd-api.vercel.app/"
+
 export default function AddComment() {
     const [rating, setRating] = useState(0);
     const [comment, setComment] = useState('');
@@ -26,7 +28,7 @@ export default function AddComment() {
       }
 
       try {
-        const res = await fetch(`https://${process.env.VERCEL_URL}/api/comments`, {
+        const res = await fetch(`${baseUrl_api}/api/comments`, {
           method: "POST",
           headers: {
             "Content-type": "application/json"
