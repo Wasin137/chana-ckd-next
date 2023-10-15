@@ -6,7 +6,7 @@ const baseUrl_api = "https://chana-ckd-api.vercel.app"
 
 const getComments = async () => {
   try {
-    const res = await fetch(`${baseUrl_api}/api/comments/firstpage`, {
+    const res = await fetch(`${baseUrl_api}/api/comments?firstpage`, {
       cache: 'no-store',
     })
 
