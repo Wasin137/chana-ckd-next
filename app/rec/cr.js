@@ -22,7 +22,7 @@ export default function Cr({ lastcr, setLastcr, onSuggestionChange, fucr, setFuc
         if (lastcr && prevcr) {
             if (lastcr > prevcr) {
                 const crdiff = (lastcr-prevcr)/prevcr
-                setDiffcr(`ค่า Cr ลดลง ${(crdiff*100).toFixed(2)}%`)
+                setDiffcr(`ค่า Cr เพิ่มขึ้น ${(crdiff*100).toFixed(2)}%`)
                 if (crdiff > 0.3){
                     const rec = 'ลด ACEI/ARB'
                     setsugcr(rec)
