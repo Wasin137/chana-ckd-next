@@ -1,6 +1,9 @@
 import React from 'react'
 import { Card, CardBody, CardHeader ,CardTitle ,CardText,Col } from 'react-bootstrap'
 import Image from 'next/image'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '../src/lib/auth'
+import RemoveBtn from './RemoveBtn'
 
 const baseUrl_api = "https://chana-ckd-api.vercel.app"
 
@@ -23,6 +26,7 @@ const getComments = async () => {
 
 export default async function Comments() {
     const {comments} = await getComments()
+    const session = await getServerSession(authOptions)
 
     return (
       <>
@@ -35,7 +39,7 @@ export default async function Comments() {
                       month: '2-digit',
                       year: 'numeric'
                   })}
-
+                   {session ? <RemoveBtn id={c._id} /> : null}
                 </CardHeader>
                 <CardBody>
                     <CardTitle>  
