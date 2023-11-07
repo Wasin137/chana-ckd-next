@@ -30,7 +30,7 @@ export default function Uacr({lastuacr, setLastuacr, onSuggestionChange, fuuacr,
             }
         }
         if (lastuacr) {
-            if (lastuacr >= 30) {
+            if (lastuacr === '30-300' || lastuacr === '>300') {
                 const rec = "ให้/เพิ่ม ACEI/ARB"
                 setSuguacr(rec)
                 onSuggestionChange(rec)
@@ -60,17 +60,17 @@ export default function Uacr({lastuacr, setLastuacr, onSuggestionChange, fuuacr,
                 <Col xs={6} lg={2}>
                     <InputGroup>
                         <InputGroup.Text>UACR</InputGroup.Text>
-                        <Form.Control type='number' placeholder='ล่าสุด' id='lastuacr' name='lastuacr' onChange={InputLastuacr}/>
+                        <Form.Select aria-label='UACR' id='lastuacr' name='lastuacr' onChange={InputLastuacr}>
+                            <option></option>
+                            <option value="30">30</option>
+                            <option value="30-300">30-300</option>
+                            <option value=">300">&gt;300</option>
+                        </Form.Select>
                     </InputGroup>
                 </Col>
                 <Col xs={6} lg={2}>
-                    <InputGroup>
-                        <InputGroup.Text>UACR</InputGroup.Text>
-                        <Form.Control type='number' placeholder='ก่อนหน้า' id='prevuacr' name='prevuacr' onChange={InputPrevuacr}/>
-                    </InputGroup>
                 </Col>
                 <Col xs={12} lg={3} className='py-1 py-lg-0'>
-                    <Form.Control type='text' placeholder={diffuacr} id='diffuacr' name='diffuacr' readOnly disabled/>
                 </Col>
                 <Col xs={12} lg={5}>
                     <InputGroup>

@@ -64,13 +64,8 @@ export default function Phos({lastphos, setLastphos, onSuggestionChange, fuphos,
                     </InputGroup>
                 </Col>
                 <Col xs={6} lg={2}>
-                    <InputGroup>
-                        <InputGroup.Text>PO4</InputGroup.Text>
-                        <Form.Control type='number' placeholder='ก่อนหน้า' id='prevphos' name='prevphos' onChange={InputPrevphos}/>
-                    </InputGroup>
                 </Col>
                 <Col xs={12} lg={3} className='py-1 py-lg-0'>
-                    <Form.Control type='text' placeholder={diffphos} id='diffphos' name='diffphos' readOnly disabled/>
                 </Col>
                 <Col xs={12} lg={5}>
                     <InputGroup>

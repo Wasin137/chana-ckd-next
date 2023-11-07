@@ -22,10 +22,6 @@ export default function Fbs({ lastfbs, setLastfbs}) {
                     </InputGroup>
                 </Col>
                 <Col xs={6} lg={2}>
-                    <InputGroup>
-                        <InputGroup.Text>FBS</InputGroup.Text>
-                        <Form.Control type='number' placeholder='ก่อนหน้า' id='prevfbs' name='prevfbs' onChange={InputPrevfbs}/>
-                    </InputGroup>
                 </Col>
             </Row>
         </>

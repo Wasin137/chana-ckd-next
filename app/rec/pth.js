@@ -64,13 +64,8 @@ export default function Pth({lastpth, setLastpth, onSuggestionChange, fupth, set
                     </InputGroup>
                 </Col>
                 <Col xs={6} lg={2}>
-                    <InputGroup>
-                        <InputGroup.Text>PTH</InputGroup.Text>
-                        <Form.Control type='number' placeholder='ก่อนหน้า' id='prevpth' name='prevpth' onChange={InputPrevpth}/>
-                    </InputGroup>
                 </Col>
                 <Col xs={12} lg={3} className='py-1 py-lg-0'>
-                    <Form.Control type='text' placeholder={diffpth} id='diffpth' name='diffpth' readOnly disabled/>
                 </Col>
                 <Col xs={12} lg={5}>
                     <InputGroup>

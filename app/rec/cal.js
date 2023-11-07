@@ -64,13 +64,8 @@ export default function Cal({lastcal, setLastcal, onSuggestionChange, fucal, set
                     </InputGroup>
                 </Col>
                 <Col xs={6} lg={2}>
-                    <InputGroup>
-                        <InputGroup.Text>Ca</InputGroup.Text>
-                        <Form.Control type='number' placeholder='ก่อนหน้า' id='prevcal' name='prevcal' onChange={InputPrevcal}/>
-                    </InputGroup>
                 </Col>
                 <Col xs={12} lg={3} className='py-1 py-lg-0'>
-                    <Form.Control type='text' placeholder={diffcal} id='diffcal' name='diffcal' readOnly disabled/>
                 </Col>
                 <Col xs={12} lg={5}>
                     <InputGroup>

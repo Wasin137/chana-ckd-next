@@ -30,13 +30,29 @@ export default function Potassium({lastk, setLastk, onSuggestionChange, fuk, set
             }
         }
         if (lastk) {
-            if (lastk < 3.5) {
-                const rec = 'KCL Elixir'
+            if (lastk <2.5) {
+                const rec = 'ส่ง ER'
                 setsugk(rec)
                 onSuggestionChange(rec)
                 setFuk(1)
-            } else if (lastk > 5.5){
-                const rec = 'ลด ACEI/ARB'
+            } else if (lastk < 3) {
+                const rec = 'ส่ง EKG'
+                setsugk(rec)
+                onSuggestionChange(rec)
+                setFuk(1)
+            } else if (lastk < 3.5) {
+                const calrec = (3.5-lastk)/0.3
+                const rec = `KCL Elixir 30 ml po q 6-12hr x ${calrec.toFixed(2)}`
+                setsugk(rec)
+                onSuggestionChange(rec)
+                setFuk(1)
+            } else if (lastk > 6){
+                const rec = 'ส่ง ER'
+                setsugk(rec)
+                onSuggestionChange(rec)
+                setFuk(1)
+            } else if (lastk > 5){
+                const rec = 'ให้ Kalimate 15-30 g'
                 setsugk(rec)
                 onSuggestionChange(rec)
                 setFuk(1)
@@ -69,13 +85,8 @@ export default function Potassium({lastk, setLastk, onSuggestionChange, fuk, set
                     </InputGroup>
                 </Col>
                 <Col xs={6} lg={2}>
-                    <InputGroup>
-                        <InputGroup.Text>K</InputGroup.Text>
-                        <Form.Control type='number' placeholder='ก่อนหน้า' id='prevk' name='prevk' onChange={InputPrevk}/>
-                    </InputGroup>
                 </Col>
                 <Col xs={12} lg={3} className='py-1 py-lg-0'>
-                    <Form.Control type='text' placeholder={diffk} id='diffk' name='diffk' readOnly disabled/>
                 </Col>
                 <Col xs={12} lg={5}>
                     <InputGroup>

@@ -64,13 +64,8 @@ export default function Hb({lasthb, setLasthb, onSuggestionChange, fuhb, setFuhb
                     </InputGroup>                
                 </Col>
                 <Col xs={6} lg={2}>
-                    <InputGroup>
-                        <InputGroup.Text>Hb</InputGroup.Text>
-                        <Form.Control type='number' placeholder='ก่อนหน้า' id='prevhb' name='prevhb' onChange={InputPrevhb}/>
-                    </InputGroup>
                 </Col>
                 <Col xs={12} lg={3} className='py-1 py-lg-0'>
-                    <Form.Control type='text' placeholder={diffhb} id='diffhb' name='diffhb' readOnly disabled/>
                 </Col>
                 <Col xs={12} lg={5}>
                     <InputGroup>

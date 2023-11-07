@@ -64,13 +64,8 @@ export default function Co2({lastco2, setLastco2, onSuggestionChange, fuco2, set
                     </InputGroup>
                 </Col>
                 <Col xs={6} lg={2}>
-                    <InputGroup>
-                        <InputGroup.Text>CO2</InputGroup.Text>
-                        <Form.Control type='number' placeholder='ก่อนหน้า' id='prevco2' name='prevco2' onChange={InputPrevco2}/>
-                    </InputGroup>
                 </Col>
                 <Col xs={12} lg={3} className='py-1 py-lg-0'>
-                    <Form.Control type='text' placeholder={diffco2} id='diffco2' name='diffco2' readOnly disabled/>
                 </Col>
                 <Col xs={12} lg={5}>
                     <InputGroup>
