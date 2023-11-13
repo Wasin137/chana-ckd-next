@@ -1,60 +1,57 @@
 'use client'
-import React, { useEffect, useState, useCallback } from 'react'
+import React, {useState, useEffect} from 'react'
 import { Row, Col, Form, InputGroup } from 'react-bootstrap'
 import Image from 'next/image'
 
-export default function Phos({lastphos, setLastphos, onSuggestionChange, fuphos, setFuphos }) {
-    const [sugphos, setSugphos] = useState('')
+export default function Alb({lastcal, corcal, setCorCal}) {
+    const [lastalb, setLastalb] = useState('')
+    const [sugcorcal, setSugCorCal] = useState('')
     const [btnDisabled, setBtnDisabled] = useState(false)
     let btnTimeout
 
-    const InputLastphos = (event) =>{
-        setLastphos(event.target.value)
+    const InputLastalb = (event) => {
+        setLastalb(event.target.value)
     }
 
-    const OutputSugphos = useCallback((lastphos) => {
-        if (lastphos){
-            if (lastphos > 4.5) {
-                const rec = 'CaCO3 (350) 1x3'
-                setSugphos(rec)
-                onSuggestionChange(rec)
-                setFuphos(3)
+    useEffect(() => {
+        if (lastalb != ''){
+            if (lastalb < 4 && lastcal) {
+                const correctcal = (0.8 * (4 - lastalb) + parseFloat(lastcal)).toFixed(2)
+                setSugCorCal(`Corrected Calcium  ${correctcal} Alb ${lastalb}`)
+                setCorCal(correctcal)
+            } else if (lastalb >= 4){
+                setSugCorCal(`Normal Albumin`)
+                setCorCal(lastcal)
             } else {
-                const rec = ''
-                setSugphos(rec)
-                onSuggestionChange(rec)
-                setFuphos('')
+                setSugCorCal('')
+                setCorCal('')
             }
         }
-    }, [setSugphos, onSuggestionChange, setFuphos])
-
-    useEffect(() => {
-        OutputSugphos(lastphos)
-    }, [lastphos, OutputSugphos])
+    }, [lastalb, lastcal])
 
     useEffect(() => {
         return () => {
             clearTimeout(btnTimeout);
         };
     }, [btnTimeout]);
-
+    
     return (
         <>
             <Row className='d-flex justify-content-between align-items-center mt-lg-2 mt-3'>
                 <Col xs={6} lg={4}>
                     <InputGroup>
-                        <InputGroup.Text>PO4</InputGroup.Text>
-                        <Form.Control type='number' placeholder='ล่าสุด' id='lastphos' name='lastphos' style={{ background:'#FFF7E3'}} onChange={InputLastphos} min={0}/>
+                        <InputGroup.Text>Alb</InputGroup.Text>
+                        <Form.Control type='number' placeholder='ล่าสุด' id='lastalb' name='lastalb' style={{ background:'#FFF7E3'}} onChange={InputLastalb} min={0}/>
                     </InputGroup>
                 </Col>
                 <Col xs={6} lg={5}>
                     <InputGroup>
-                        <Form.Control type='text' placeholder={sugphos} id='sugphos' name='sugphos' style={{ background:'white'}} readOnly disabled/>
+                        <Form.Control type='text' placeholder={sugcorcal} id='corcal' name='corcal' style={{ background:'white'}} readOnly disabled />
                         <InputGroup.Text>
                             <div 
                                 onClick={() => {
                                     if (!btnDisabled) {
-                                        navigator.clipboard.writeText(sugphos);
+                                        navigator.clipboard.writeText(sugcorcal);
                                         setBtnDisabled(true);
                                         btnTimeout = setTimeout(() => {
                                             setBtnDisabled(false);
@@ -70,7 +67,7 @@ export default function Phos({lastphos, setLastphos, onSuggestionChange, fuphos,
                                 />
                             </div>
                         </InputGroup.Text>
-                    </InputGroup>                
+                    </InputGroup>
                 </Col>
             </Row>
         </>

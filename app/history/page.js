@@ -22,6 +22,13 @@ const updateHistory = [
       'เพิ่มระบบการให้คะแนน และรีวิว',
       'ระบบจัดการสำหรับ Admin'
     ]
+  },
+  {
+    version: '0.4',
+    functions : [
+      'ปรับ UI ตาม User',
+      'ระบบคำนวณ Calcium , Correct Calcium'
+    ]
   }
 ]
 

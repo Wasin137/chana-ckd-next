@@ -3,33 +3,33 @@ import React, { useEffect, useState, useCallback } from 'react'
 import { Row, Col, Form, InputGroup } from 'react-bootstrap'
 import Image from 'next/image'
 
+import Alb from './alb'
+
 export default function Cal({lastcal, setLastcal, onSuggestionChange, fucal, setFucal }) {
-    const [prevcal, setPrevcal] = useState('')
-    const [diffcal, setDiffcal] = useState('')
     const [sugcal, setSugcal] = useState('')
     const [btnDisabled, setBtnDisabled] = useState(false)
     let btnTimeout
 
+    // Alb
+    const [corcal, setCorCal] = useState('')
+
     const InputLastcal = (event) =>{
         setLastcal(event.target.value)
     }
-
-    const InputPrevcal = (event) =>{
-        setPrevcal(event.target.value)
-    }
-
-    const OutputSugCal = useCallback((lastcal, prevcal) => {
-        if (lastcal && prevcal) {
-            const caldiff = lastcal - prevcal
-            if (caldiff > 0) {
-                setDiffcal(`ค่า Calcium เพิ่มขึ้น ${caldiff}`)
-            } else if (caldiff === 0){
-                setDiffcal('ไม่มีการเปลี่ยนแปลง')
+    const OutputSugCal = useCallback((lastcal, corcal) => {
+        if (lastcal && corcal) {
+            if (corcal < 9) {
+                const rec = 'CaCO3 (1000) 1x1'
+                setSugcal(rec)
+                onSuggestionChange(rec)
+                setFucal(3)
             } else {
-                setDiffcal(`ค่า Calcium ลดลง ${Math.abs(caldiff)}`)
+                const rec = ''
+                setSugcal(rec)
+                onSuggestionChange(rec)
+                setFucal('')
             }
-        }
-        if (lastcal) {
+        } else if (lastcal){
             if (lastcal < 9) {
                 const rec = 'CaCO3 (1000) 1x1'
                 setSugcal(rec)
@@ -42,11 +42,11 @@ export default function Cal({lastcal, setLastcal, onSuggestionChange, fucal, set
                 setFucal('')
             }
         }
-    }, [setDiffcal, setSugcal, onSuggestionChange, setFucal]);
+    }, [setSugcal, onSuggestionChange, setFucal]);
 
     useEffect(() => {
-        OutputSugCal(lastcal, prevcal)
-    }, [lastcal, prevcal, OutputSugCal])
+        OutputSugCal(lastcal, corcal)
+    }, [lastcal, corcal,OutputSugCal])
 
     useEffect(() => {
         return () => {
@@ -56,21 +56,16 @@ export default function Cal({lastcal, setLastcal, onSuggestionChange, fucal, set
 
     return (
         <>
-            <Row className='d-flex justify-content-center align-items-center mt-lg-2 mt-3'>
-                <Col xs={6} lg={2}>
+            <Row className='d-flex justify-content-between align-items-center mt-lg-2 mt-3'>
+                <Col xs={6} lg={4}>
                     <InputGroup>
                         <InputGroup.Text>Ca</InputGroup.Text>
-                        <Form.Control type='number' placeholder='ล่าสุด' id='lastcal' name='lastcal' onChange={InputLastcal}/>
+                        <Form.Control type='number' placeholder='ล่าสุด' id='lastcal' name='lastcal' style={{ background:'#FFF7E3'}} onChange={InputLastcal} min={0}/>
                     </InputGroup>
                 </Col>
-                <Col xs={6} lg={2}>
-                </Col>
-                <Col xs={12} lg={3} className='py-1 py-lg-0'>
-                </Col>
-                <Col xs={12} lg={5}>
+                <Col xs={6} lg={5}>
                     <InputGroup>
-                        <InputGroup.Text>คำแนะนำ</InputGroup.Text>
-                        <Form.Control type='text' placeholder={sugcal} id='sugcal' name='sugcal' readOnly/>
+                        <Form.Control type='text' placeholder={sugcal} id='sugcal' name='sugcal' style={{ background:'white'}} readOnly disabled/>
                         <InputGroup.Text>
                             <div 
                                 onClick={() => {
@@ -94,6 +89,7 @@ export default function Cal({lastcal, setLastcal, onSuggestionChange, fucal, set
                     </InputGroup>
                 </Col>
             </Row>
+            <Alb corcal={corcal} setCorCal={setCorCal} lastcal={lastcal}/>
         </>
     )
 }

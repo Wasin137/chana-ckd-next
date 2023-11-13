@@ -4,8 +4,6 @@ import { Row, Col, Form, InputGroup } from 'react-bootstrap'
 import Image from 'next/image'
 
 export default function Hb({lasthb, setLasthb, onSuggestionChange, fuhb, setFuhb }) {
-    const [prevhb, setPrevhb] = useState(10)
-    const [diffhb, setDiffhb] = useState('')
     const [sughb, setSughb] = useState('')
     const [btnDisabled, setBtnDisabled] = useState(false)
     let btnTimeout
@@ -14,21 +12,7 @@ export default function Hb({lasthb, setLasthb, onSuggestionChange, fuhb, setFuhb
         setLasthb(event.target.value)
     }
 
-    const InputPrevhb = (event) =>{
-        setPrevhb(event.target.value)
-    }
-
-    const OutputSughb = useCallback((lasthb, prevhb) => {
-        if (lasthb && prevhb) {
-            const hbdiff = lasthb - prevhb
-            if (hbdiff > 0) {
-                setDiffhb(`ค่า Hb เพิ่มขึ้น ${hbdiff}`)
-            } else if (hbdiff === 0){
-                setDiffhb('ไม่มีการเปลี่ยนแปลง')
-            } else {
-                setDiffhb(`ค่า Hb ลดลง ${Math.abs(hbdiff)}`)
-            }
-        }
+    const OutputSughb = useCallback((lasthb) => {
         if (lasthb) {
             if (lasthb < 11) {
                 const rec = "ให้/เพิ่ม Ferrous+Folic"
@@ -42,11 +26,11 @@ export default function Hb({lasthb, setLasthb, onSuggestionChange, fuhb, setFuhb
                 setFuhb('')
             }
         }
-    }, [setDiffhb, setSughb, onSuggestionChange, setFuhb])
+    }, [setSughb, onSuggestionChange, setFuhb])
 
     useEffect(() => {
-        OutputSughb(lasthb, prevhb)
-    }, [lasthb, prevhb, OutputSughb])
+        OutputSughb(lasthb)
+    }, [lasthb, OutputSughb])
 
     useEffect(() => {
         return () => {
@@ -56,21 +40,16 @@ export default function Hb({lasthb, setLasthb, onSuggestionChange, fuhb, setFuhb
 
     return (
         <>
-            <Row className='d-flex justify-content-center align-items-center mt-lg-2 mt-3'>
-                <Col xs={6} lg={2}>
+            <Row className='d-flex justify-content-between align-items-center mt-lg-2 mt-3'>
+                <Col xs={6} lg={4}>
                     <InputGroup>
                         <InputGroup.Text>Hb</InputGroup.Text>
-                        <Form.Control type='number' placeholder='ล่าสุด' id='lasthb' name='lasthb' onChange={InputLasthb}/>
+                        <Form.Control type='number' placeholder='ล่าสุด' id='lasthb' name='lasthb' style={{ background:'#FFF7E3'}} onChange={InputLasthb} min={0}/>
                     </InputGroup>                
                 </Col>
-                <Col xs={6} lg={2}>
-                </Col>
-                <Col xs={12} lg={3} className='py-1 py-lg-0'>
-                </Col>
-                <Col xs={12} lg={5}>
+                <Col xs={6} lg={5}>
                     <InputGroup>
-                        <InputGroup.Text>คำแนะนำ</InputGroup.Text>
-                        <Form.Control type='text' placeholder={sughb} id='sughb' name='sughb' readOnly/>
+                        <Form.Control type='text' placeholder={sughb} id='sughb' name='sughb' style={{ background:'white'}} readOnly disabled/>
                         <InputGroup.Text>
                             <div 
                                 onClick={() => {

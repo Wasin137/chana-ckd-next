@@ -22,7 +22,7 @@ export default function Cr({ lastcr, setLastcr, onSuggestionChange, fucr, setFuc
         if (lastcr && prevcr) {
             if (lastcr > prevcr) {
                 const crdiff = (lastcr-prevcr)/prevcr
-                setDiffcr(`ค่า Cr เพิ่มขึ้น ${(crdiff*100).toFixed(2)}%`)
+                setDiffcr(`เพิ่มขึ้น ${(crdiff*100).toFixed(2)}%`)
                 if (crdiff > 0.3){
                     const rec = 'ลด ACEI/ARB'
                     setsugcr(rec)
@@ -57,25 +57,24 @@ export default function Cr({ lastcr, setLastcr, onSuggestionChange, fucr, setFuc
     return (
         <>
             <Row className='d-flex justify-content-center align-items-center mt-lg-2 mt-3'>
-                <Col xs={6} lg={2}>
+                <Col xs={4} lg={2}>
                     <InputGroup>
                         <InputGroup.Text>Cr</InputGroup.Text>
-                        <Form.Control type='number' placeholder='ล่าสุด' id='lastcr' name='lastcr' onChange={InputLastcr}/>
+                        <Form.Control type='number' placeholder='ล่าสุด' id='lastcr' name='lastcr' style={{ background:'#FFF7E3'}} onChange={InputLastcr} min={0}/>
                     </InputGroup>
                 </Col>
-                <Col xs={6} lg={2}>
+                <Col xs={4} lg={2}>
                     <InputGroup>
                         <InputGroup.Text>Cr</InputGroup.Text>
-                        <Form.Control type='number' placeholder='ก่อนหน้า' id='prevcr' name='prevcr' onChange={InputPrevcr}/>
+                        <Form.Control type='number' placeholder='ก่อนหน้า' id='prevcr' name='prevcr' style={{ background:'#FDEBD0'}} onChange={InputPrevcr} min={0}/>
                     </InputGroup>
                 </Col>
-                <Col xs={12} lg={3} className='py-1 py-lg-0'>
+                <Col xs={4} lg={3} className='py-1 py-lg-0'>
                     <Form.Control type='text' placeholder={diffcr} id='diffcr' name='diffcr' readOnly disabled/>
                 </Col>
                 <Col xs={12} lg={5}>
                     <InputGroup>
-                        <InputGroup.Text>คำแนะนำ</InputGroup.Text>
-                        <Form.Control type='text' placeholder={sugcr} id='sugcr' name='sugcr' readOnly/>
+                        <Form.Control type='text' placeholder={sugcr} id='sugcr' name='sugcr' style={{ background:'white'}} readOnly disabled/>
                         <InputGroup.Text>
                             <div 
                                 onClick={() => {

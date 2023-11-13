@@ -22,11 +22,11 @@ export default function Gfr({ lastgfr, setLastgfr, onSuggestionChange, fugfr, se
         if (lastgfr && prevgfr){
             const diff = lastgfr - prevgfr
             if (diff > 0) {
-                setDiffgfr(`ค่า GFR ดีขึ้น ${diff}`)
+                setDiffgfr(`เพิ่มขึ้น ${diff}`)
             } else if (diff === 0){
                 setDiffgfr('ไม่มีการเปลี่ยนแปลง')
             } else {
-                setDiffgfr(`ค่า GFR ลดลง ${Math.abs(diff)}`)
+                setDiffgfr(`ลดลง ${Math.abs(diff)}`)
             }
             if (diff < -5){
                 setFugfr(1)
@@ -65,25 +65,24 @@ export default function Gfr({ lastgfr, setLastgfr, onSuggestionChange, fugfr, se
     return (
         <>
             <Row className='d-flex justify-content-center align-items-center mt-lg-2 mt-3'>
-                <Col xs={6} lg={2}>
+                <Col xs={4} lg={2}>
                     <InputGroup>
                         <InputGroup.Text>eGFR</InputGroup.Text>
-                        <Form.Control type='number' placeholder='ล่าสุด' id='lastgfr' name='lastgfr' onChange={InputLastgfr}/>
+                        <Form.Control type='number' placeholder='ล่าสุด' id='lastgfr' name='lastgfr' style={{ background:'#FFF7E3'}} onChange={InputLastgfr} min={0}/>
                     </InputGroup>
                 </Col>
-                <Col xs={6} lg={2}>
+                <Col xs={4} lg={2}>
                     <InputGroup>
                         <InputGroup.Text>eGFR</InputGroup.Text>
-                        <Form.Control type='number' placeholder='ก่อนหน้า' id='prevgfr' name='prevgfr' onChange={InputPrevgfr}/>
+                        <Form.Control type='number' placeholder='ก่อนหน้า' id='prevgfr' name='prevgfr' style={{ background:'#FDEBD0'}} onChange={InputPrevgfr} min={0}/>
                     </InputGroup>
                 </Col>
-                <Col xs={12} lg={3} className='py-1 py-lg-0'>
+                <Col xs={4} lg={3} className='py-1 py-lg-0'>
                     <Form.Control type='text' placeholder={diffgfr} id='diffgfr' name='diffgfr' readOnly disabled/>
                 </Col>
                 <Col xs={12} lg={5}>
                     <InputGroup>
-                        <InputGroup.Text>คำแนะนำ</InputGroup.Text>
-                        <Form.Control type='text' placeholder={suggfr} id='suggfr' name='suggfr' readOnly/>
+                        <Form.Control type='text' placeholder={suggfr} id='suggfr' name='suggfr' style={{ background:'white'}} readOnly disabled/>
                         <InputGroup.Text>
                             <div 
                                 onClick={() => {

@@ -4,8 +4,6 @@ import { Row, Col, Form, InputGroup } from 'react-bootstrap'
 import Image from 'next/image'
 
 export default function Uacr({lastuacr, setLastuacr, onSuggestionChange, fuuacr, setFuuacr }) {
-    const [prevuacr, setPrevuacr] = useState(10)
-    const [diffuacr, setDiffuacr] = useState('')
     const [suguacr, setSuguacr] = useState('')
     const [btnDisabled, setBtnDisabled] = useState(false)
     let btnTimeout
@@ -14,21 +12,7 @@ export default function Uacr({lastuacr, setLastuacr, onSuggestionChange, fuuacr,
         setLastuacr(event.target.value)
     }
 
-    const InputPrevuacr = (event) =>{
-        setPrevuacr(event.target.value)
-    }
-
-    const OutputSuguacr = useCallback((lastuacr, prevuacr) => {
-        if (lastuacr && prevuacr) {
-            const uacrdiff = lastuacr - prevuacr
-            if (uacrdiff > 0) {
-                setDiffuacr(`ค่า UACR เพิ่มขึ้น ${uacrdiff}`)
-            } else if (uacrdiff === 0){
-                setDiffuacr('ไม่มีการเปลี่ยนแปลง')
-            } else {
-                setDiffuacr(`ค่า UACR ลดลง ${Math.abs(uacrdiff)}`)
-            }
-        }
+    const OutputSuguacr = useCallback((lastuacr) => {
         if (lastuacr) {
             if (lastuacr === '30-300' || lastuacr === '>300') {
                 const rec = "ให้/เพิ่ม ACEI/ARB"
@@ -42,11 +26,11 @@ export default function Uacr({lastuacr, setLastuacr, onSuggestionChange, fuuacr,
                 setFuuacr('')
             }
         }
-    }, [setDiffuacr, setSuguacr, onSuggestionChange, setFuuacr])
+    }, [setSuguacr, onSuggestionChange, setFuuacr])
 
     useEffect(() => {
-        OutputSuguacr(lastuacr, prevuacr)
-    }, [lastuacr, prevuacr, OutputSuguacr])
+        OutputSuguacr(lastuacr)
+    }, [lastuacr, OutputSuguacr])
 
     useEffect(() => {
         return () => {
@@ -56,26 +40,21 @@ export default function Uacr({lastuacr, setLastuacr, onSuggestionChange, fuuacr,
 
     return (
         <>
-            <Row className='d-flex justify-content-center align-items-center mt-lg-2 mt-3'>
-                <Col xs={6} lg={2}>
+            <Row className='d-flex justify-content-between align-items-center mt-lg-2 mt-3'>
+                <Col xs={6} lg={4}>
                     <InputGroup>
                         <InputGroup.Text>UACR</InputGroup.Text>
-                        <Form.Select aria-label='UACR' id='lastuacr' name='lastuacr' onChange={InputLastuacr}>
-                            <option></option>
+                        <Form.Select aria-label='UACR' id='lastuacr' name='lastuacr' style={{ background:'#FFF7E3'}} onChange={InputLastuacr}>
+                            <option value=''></option>
                             <option value="30">30</option>
                             <option value="30-300">30-300</option>
                             <option value=">300">&gt;300</option>
                         </Form.Select>
                     </InputGroup>
                 </Col>
-                <Col xs={6} lg={2}>
-                </Col>
-                <Col xs={12} lg={3} className='py-1 py-lg-0'>
-                </Col>
-                <Col xs={12} lg={5}>
+                <Col xs={6} lg={5}>
                     <InputGroup>
-                        <InputGroup.Text>คำแนะนำ</InputGroup.Text>
-                        <Form.Control type='text' placeholder={suguacr} id='suguacr' name='suguacr' readOnly/>
+                        <Form.Control type='text' placeholder={suguacr} id='suguacr' name='suguacr' style={{ background:'white'}} readOnly disabled/>
                         <InputGroup.Text>
                             <div 
                                 onClick={() => {
